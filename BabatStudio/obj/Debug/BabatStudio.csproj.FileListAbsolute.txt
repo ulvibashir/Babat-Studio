@@ -1,0 +1,13 @@
+C:\Users\Bxsi_nlu2\source\repos\BabatStudio\BabatStudio\bin\Debug\BabatStudio.exe.config
+C:\Users\Bxsi_nlu2\source\repos\BabatStudio\BabatStudio\bin\Debug\BabatStudio.exe
+C:\Users\Bxsi_nlu2\source\repos\BabatStudio\BabatStudio\bin\Debug\BabatStudio.pdb
+C:\Users\Bxsi_nlu2\source\repos\BabatStudio\BabatStudio\obj\Debug\BabatStudio.csprojAssemblyReference.cache
+C:\Users\Bxsi_nlu2\source\repos\BabatStudio\BabatStudio\obj\Debug\BabatStudio.BabatStudio.resources
+C:\Users\Bxsi_nlu2\source\repos\BabatStudio\BabatStudio\obj\Debug\BabatStudio.Properties.Resources.resources
+C:\Users\Bxsi_nlu2\source\repos\BabatStudio\BabatStudio\obj\Debug\BabatStudio.csproj.GenerateResource.cache
+C:\Users\Bxsi_nlu2\source\repos\BabatStudio\BabatStudio\obj\Debug\BabatStudio.csproj.CoreCompileInputs.cache
+C:\Users\Bxsi_nlu2\source\repos\BabatStudio\BabatStudio\obj\Debug\BabatStudio.exe
+C:\Users\Bxsi_nlu2\source\repos\BabatStudio\BabatStudio\obj\Debug\BabatStudio.pdb
+C:\Users\Bxsi_nlu2\source\repos\BabatStudio\BabatStudio\bin\Debug\FastColoredTextBox.dll
+C:\Users\Bxsi_nlu2\source\repos\BabatStudio\BabatStudio\bin\Debug\FastColoredTextBox.xml
+C:\Users\Bxsi_nlu2\source\repos\BabatStudio\BabatStudio\obj\Debug\BabatStudio.csproj.CopyComplete
