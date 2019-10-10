@@ -11,3 +11,4 @@ C:\Users\Bxsi_nlu2\source\repos\BabatStudio\BabatStudio\obj\Debug\BabatStudio.pd
 C:\Users\Bxsi_nlu2\source\repos\BabatStudio\BabatStudio\bin\Debug\FastColoredTextBox.dll
 C:\Users\Bxsi_nlu2\source\repos\BabatStudio\BabatStudio\bin\Debug\FastColoredTextBox.xml
 C:\Users\Bxsi_nlu2\source\repos\BabatStudio\BabatStudio\obj\Debug\BabatStudio.csproj.CopyComplete
+C:\Users\Bxsi_nlu2\source\repos\BabatStudio\BabatStudio\obj\Debug\BabatStudio.Views.New_Project.resources
