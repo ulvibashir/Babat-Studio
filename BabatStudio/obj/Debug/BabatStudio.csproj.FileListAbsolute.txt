@@ -12,3 +12,20 @@ C:\Users\Bxsi_nlu2\source\repos\BabatStudio\BabatStudio\bin\Debug\FastColoredTex
 C:\Users\Bxsi_nlu2\source\repos\BabatStudio\BabatStudio\bin\Debug\FastColoredTextBox.xml
 C:\Users\Bxsi_nlu2\source\repos\BabatStudio\BabatStudio\obj\Debug\BabatStudio.csproj.CopyComplete
 C:\Users\Bxsi_nlu2\source\repos\BabatStudio\BabatStudio\obj\Debug\BabatStudio.Views.New_Project.resources
+D:\Visual Studio files\Babat-Studio\BabatStudio\bin\Debug\BabatStudio.exe.config
+D:\Visual Studio files\Babat-Studio\BabatStudio\bin\Debug\BabatStudio.exe
+D:\Visual Studio files\Babat-Studio\BabatStudio\bin\Debug\BabatStudio.pdb
+D:\Visual Studio files\Babat-Studio\BabatStudio\bin\Debug\FastColoredTextBox.dll
+D:\Visual Studio files\Babat-Studio\BabatStudio\bin\Debug\FastColoredTextBox.xml
+D:\Visual Studio files\Babat-Studio\BabatStudio\obj\Debug\BabatStudio.csprojAssemblyReference.cache
+D:\Visual Studio files\Babat-Studio\BabatStudio\obj\Debug\BabatStudio.Properties.Resources.resources
+D:\Visual Studio files\Babat-Studio\BabatStudio\obj\Debug\BabatStudio.csproj.GenerateResource.cache
+D:\Visual Studio files\Babat-Studio\BabatStudio\obj\Debug\BabatStudio.csproj.CoreCompileInputs.cache
+D:\Visual Studio files\Babat-Studio\BabatStudio\obj\Debug\BabatStudio.csproj.CopyComplete
+D:\Visual Studio files\Babat-Studio\BabatStudio\obj\Debug\BabatStudio.exe
+D:\Visual Studio files\Babat-Studio\BabatStudio\obj\Debug\BabatStudio.pdb
+D:\Visual Studio files\Babat-Studio\BabatStudio\bin\Debug\Autofac.dll
+D:\Visual Studio files\Babat-Studio\BabatStudio\bin\Debug\Autofac.pdb
+D:\Visual Studio files\Babat-Studio\BabatStudio\bin\Debug\Autofac.xml
+D:\Visual Studio files\Babat-Studio\BabatStudio\obj\Debug\BabatStudio.BabatStudioForm.resources
+D:\Visual Studio files\Babat-Studio\BabatStudio\obj\Debug\BabatStudio.Views.New_ProjectForm.resources
