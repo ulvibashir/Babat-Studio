@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IBabatStudioForm.cs" />
+    <Compile Include="Interfaces\IView.cs" />
     <Compile Include="Models\ProjectCLS.cs" />
     <Compile Include="Presenters\BabatStudioPresenter.cs" />
     <Compile Include="Presenters\NewProjectPresenter.cs" />

@@ -1,16 +1,18 @@
-﻿using System;
+﻿using BabatStudio.Interfaces;
+using System;
 
 namespace BabatStudio.Views
 {
-    public interface INew_Project
+    public interface INew_Project : IView
     {
         event EventHandler CancelEvent;
         event EventHandler ChooseFolderEvent;
         event EventHandler CreateSubdirEvent;
         event EventHandler OkEvent;
+        event EventHandler TextChangedEvent;
 
 
-        void ShowDialogOfView();
+      
         void BtnCancel_Click(object sender, EventArgs e);
         void BtnChoosefolder_Click(object sender, EventArgs e);
         void BtnOK_Click(object sender, EventArgs e);

@@ -43,7 +43,12 @@ namespace BabatStudio.Presenters
         {
             var newProjectPresenter = IoC.Reference.Resolve<NewProjectPresenter>();
 
-            newProjectPresenter._new_Project.ShowDialogOfView();
+            if (newProjectPresenter._new_Project.ShowDialog())
+            {
+
+            }
+
+            
            
 
         }

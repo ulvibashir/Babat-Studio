@@ -80,6 +80,7 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(174, 20);
             this.txtName.TabIndex = 3;
+            this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
             // 
             // chkCreateSubdir
             // 
@@ -130,7 +131,7 @@
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.BtnOK_Click);
             // 
-            // New_Project
+            // New_ProjectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -140,7 +141,7 @@
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "New_Project";
+            this.Name = "New_ProjectForm";
             this.Text = "New Project";
             this.Load += new System.EventHandler(this.New_Project_Load);
             this.groupBox1.ResumeLayout(false);

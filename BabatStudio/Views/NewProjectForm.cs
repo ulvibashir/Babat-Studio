@@ -29,10 +29,11 @@ namespace BabatStudio.Views
         public event EventHandler OkEvent;
         public event EventHandler CancelEvent;
         public event EventHandler ChooseFolderEvent;
+        public event EventHandler TextChangedEvent;
 
         public void BtnChoosefolder_Click(object sender, EventArgs e)
         {
-            ChooseFolderEvent.Invoke(sender, e);
+            ChooseFolderEvent.Invoke(txtFolder, e);
         }
 
         public void ChkCreateSubdir_CheckedChanged(object sender, EventArgs e)
@@ -50,10 +51,16 @@ namespace BabatStudio.Views
             OkEvent.Invoke(sender, e);
         }
 
-        public void ShowDialogOfView()
+      
+
+        private void txtName_TextChanged(object sender, EventArgs e)
         {
-            this.ShowDialog();
+            TextChangedEvent.Invoke(sender, e);
         }
-     
+
+        bool IView.ShowDialog()
+        {
+            return this.ShowDialog() == DialogResult.OK;
+        }
     }
 }
