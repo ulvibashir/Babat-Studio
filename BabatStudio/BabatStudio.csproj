@@ -67,7 +67,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Interfaces\INew_Project.cs" />
+    <Compile Include="Interfaces\INewProjectView.cs" />
     <Compile Include="Views\NewProjectForm.cs">
       <SubType>Form</SubType>
     </Compile>

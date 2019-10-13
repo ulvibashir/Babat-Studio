@@ -44,16 +44,12 @@ namespace BabatStudio.Presenters
             var newProjectPresenter = IoC.Reference.Resolve<NewProjectPresenter>();
             var projectInfo  = IoC.Reference.Resolve<ProjectInfo>();
 
-            if (newProjectPresenter._new_Project.ShowDialog())
+            if (newProjectPresenter._newProjectForm.ShowDialog())
             {
-                projectInfo = newProjectPresenter._new_Project.GetProjectInfo();
-                project.ProjectName = projectInfo.ProjectName;
-                project.Path = projectInfo.ProjectPath;
-                project.Writer(projectInfo.CreateSubdirCheck);
-                
+                project.ProjectName = newProjectPresenter._newProjectForm.ProjectName;
+                project.Path = newProjectPresenter._newProjectForm.ProjectPath;
+                project.Writer(newProjectPresenter._newProjectForm.HasSubdir);
             }
-            
-
         }
 
         public void SetNewProjectForm(ProjectInfo projectInfo)

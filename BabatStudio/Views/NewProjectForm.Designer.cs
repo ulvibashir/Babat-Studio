@@ -82,7 +82,6 @@ namespace BabatStudio.Views
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(174, 20);
             this.txtName.TabIndex = 3;
-            this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
             // 
             // chkCreateSubdir
             // 
@@ -93,7 +92,6 @@ namespace BabatStudio.Views
             this.chkCreateSubdir.TabIndex = 2;
             this.chkCreateSubdir.Text = "Create Subdirectory";
             this.chkCreateSubdir.UseVisualStyleBackColor = true;
-            this.chkCreateSubdir.CheckedChanged += new System.EventHandler(this.ChkCreateSubdir_CheckedChanged);
             // 
             // label2
             // 
@@ -121,7 +119,6 @@ namespace BabatStudio.Views
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // btnOK
             // 
@@ -131,7 +128,6 @@ namespace BabatStudio.Views
             this.btnOK.TabIndex = 2;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.BtnOK_Click);
             // 
             // New_ProjectForm
             // 

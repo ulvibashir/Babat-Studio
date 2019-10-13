@@ -22,7 +22,7 @@ namespace BabatStudio
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             IoC.Reference.Register<BabatStudioForm, IBabatStudioForm>()
-                .Register<New_ProjectForm, INew_Project>()
+                .Register<New_ProjectForm, INewProjectView>()
                 .Register<NewProjectPresenter>()
                 .Register<BabatStudioPresenter>()
                 .Register<ProjectInfo>().Build();
