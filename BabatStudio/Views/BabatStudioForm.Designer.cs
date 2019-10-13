@@ -226,13 +226,13 @@
             // projectTreeCollapsedToolStripMenuItem
             // 
             this.projectTreeCollapsedToolStripMenuItem.Name = "projectTreeCollapsedToolStripMenuItem";
-            this.projectTreeCollapsedToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.projectTreeCollapsedToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.projectTreeCollapsedToolStripMenuItem.Text = "Project Tree Collapsed";
             // 
             // errorsTreeCollapsedToolStripMenuItem
             // 
             this.errorsTreeCollapsedToolStripMenuItem.Name = "errorsTreeCollapsedToolStripMenuItem";
-            this.errorsTreeCollapsedToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.errorsTreeCollapsedToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.errorsTreeCollapsedToolStripMenuItem.Text = "Errors Tree Collapsed";
             // 
             // projectToolStripMenuItem
@@ -559,7 +559,6 @@
             this.fastColoredTextBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fastColoredTextBox1.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fastColoredTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fastColoredTextBox1.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fastColoredTextBox1.IsReplaceMode = false;
             this.fastColoredTextBox1.Location = new System.Drawing.Point(3, 3);
             this.fastColoredTextBox1.Name = "fastColoredTextBox1";
@@ -595,14 +594,13 @@
         '\"',
         '\'',
         '\''};
-            this.fastColoredTextBox2.AutoScrollMinSize = new System.Drawing.Size(2, 28);
+            this.fastColoredTextBox2.AutoScrollMinSize = new System.Drawing.Size(27, 28);
             this.fastColoredTextBox2.BackBrush = null;
             this.fastColoredTextBox2.CharHeight = 14;
             this.fastColoredTextBox2.CharWidth = 8;
             this.fastColoredTextBox2.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fastColoredTextBox2.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fastColoredTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fastColoredTextBox2.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fastColoredTextBox2.IsReplaceMode = false;
             this.fastColoredTextBox2.Location = new System.Drawing.Point(3, 3);
             this.fastColoredTextBox2.Name = "fastColoredTextBox2";
@@ -647,7 +645,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 136F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 766F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 155F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 113F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 114F));
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 2, 0);
@@ -697,7 +695,7 @@
             this.label4.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.label4.Location = new System.Drawing.Point(1064, 8);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(107, 13);
+            this.label4.Size = new System.Drawing.Size(108, 13);
             this.label4.TabIndex = 3;
             this.label4.Text = "File";
             // 

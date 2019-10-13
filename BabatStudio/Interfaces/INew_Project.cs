@@ -9,6 +9,8 @@ namespace BabatStudio.Views
         event EventHandler CreateSubdirEvent;
         event EventHandler OkEvent;
 
+
+        void ShowDialogOfView();
         void BtnCancel_Click(object sender, EventArgs e);
         void BtnChoosefolder_Click(object sender, EventArgs e);
         void BtnOK_Click(object sender, EventArgs e);

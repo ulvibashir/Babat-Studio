@@ -29,3 +29,20 @@ D:\Visual Studio files\Babat-Studio\BabatStudio\bin\Debug\Autofac.pdb
 D:\Visual Studio files\Babat-Studio\BabatStudio\bin\Debug\Autofac.xml
 D:\Visual Studio files\Babat-Studio\BabatStudio\obj\Debug\BabatStudio.BabatStudioForm.resources
 D:\Visual Studio files\Babat-Studio\BabatStudio\obj\Debug\BabatStudio.Views.New_ProjectForm.resources
+C:\Users\XLXk_g8rg\Downloads\Babat-Studio\BabatStudio\bin\Debug\BabatStudio.exe.config
+C:\Users\XLXk_g8rg\Downloads\Babat-Studio\BabatStudio\bin\Debug\BabatStudio.exe
+C:\Users\XLXk_g8rg\Downloads\Babat-Studio\BabatStudio\bin\Debug\BabatStudio.pdb
+C:\Users\XLXk_g8rg\Downloads\Babat-Studio\BabatStudio\bin\Debug\Autofac.dll
+C:\Users\XLXk_g8rg\Downloads\Babat-Studio\BabatStudio\bin\Debug\FastColoredTextBox.dll
+C:\Users\XLXk_g8rg\Downloads\Babat-Studio\BabatStudio\bin\Debug\Autofac.pdb
+C:\Users\XLXk_g8rg\Downloads\Babat-Studio\BabatStudio\bin\Debug\Autofac.xml
+C:\Users\XLXk_g8rg\Downloads\Babat-Studio\BabatStudio\bin\Debug\FastColoredTextBox.xml
+C:\Users\XLXk_g8rg\Downloads\Babat-Studio\BabatStudio\obj\Debug\BabatStudio.csprojAssemblyReference.cache
+C:\Users\XLXk_g8rg\Downloads\Babat-Studio\BabatStudio\obj\Debug\BabatStudio.BabatStudioForm.resources
+C:\Users\XLXk_g8rg\Downloads\Babat-Studio\BabatStudio\obj\Debug\BabatStudio.Properties.Resources.resources
+C:\Users\XLXk_g8rg\Downloads\Babat-Studio\BabatStudio\obj\Debug\BabatStudio.Views.New_ProjectForm.resources
+C:\Users\XLXk_g8rg\Downloads\Babat-Studio\BabatStudio\obj\Debug\BabatStudio.csproj.GenerateResource.cache
+C:\Users\XLXk_g8rg\Downloads\Babat-Studio\BabatStudio\obj\Debug\BabatStudio.csproj.CoreCompileInputs.cache
+C:\Users\XLXk_g8rg\Downloads\Babat-Studio\BabatStudio\obj\Debug\BabatStudio.csproj.CopyComplete
+C:\Users\XLXk_g8rg\Downloads\Babat-Studio\BabatStudio\obj\Debug\BabatStudio.exe
+C:\Users\XLXk_g8rg\Downloads\Babat-Studio\BabatStudio\obj\Debug\BabatStudio.pdb

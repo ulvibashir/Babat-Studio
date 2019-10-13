@@ -24,7 +24,7 @@ namespace BabatStudio.Views
             btnOK.DialogResult = DialogResult.OK;
         }
 
-
+        
         public event EventHandler CreateSubdirEvent;
         public event EventHandler OkEvent;
         public event EventHandler CancelEvent;
@@ -50,5 +50,10 @@ namespace BabatStudio.Views
             OkEvent.Invoke(sender, e);
         }
 
+        public void ShowDialogOfView()
+        {
+            this.ShowDialog();
+        }
+     
     }
 }

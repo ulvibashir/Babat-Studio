@@ -10,9 +10,11 @@ using System.IO;
 
 namespace BabatStudio.Presenters
 {
-    class NewProjectPresenter
+    class NewProjectPresenter 
     {
         public INew_Project _new_Project { get; set; }
+
+        
         public NewProjectPresenter(INew_Project new_Project)
         {
             _new_Project = new_Project;
@@ -34,6 +36,7 @@ namespace BabatStudio.Presenters
                     string[] files = Directory.GetFiles(fbd.SelectedPath);
 
                    MessageBox.Show("Files found: " + files.Length.ToString(), "Message");
+
                 }
             }
         }

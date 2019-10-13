@@ -12,10 +12,18 @@ namespace BabatStudio.Presenters
     {
         public IBabatStudioForm _babatStudioForm { get; set; }
         public ProjectCLS project = new ProjectCLS();
+
+
+
         public BabatStudioPresenter(IBabatStudioForm babatStudioForm)
         {
             _babatStudioForm = babatStudioForm;
 
+            Subscribe();
+        }
+
+        private void Subscribe()
+        {
             _babatStudioForm.NewProjectEvent += NewProjectPR;
             _babatStudioForm.OpenProjectEvent += OpenProjectPR;
             _babatStudioForm.NewFileEvent += NewFilePR;
@@ -33,7 +41,9 @@ namespace BabatStudio.Presenters
 
         public void NewProjectPR(object sender, EventArgs e)
         {
-            NewProjectPresenter newProjectPresenter = IoC.Reference.Resolve<NewProjectPresenter>();
+            var newProjectPresenter = IoC.Reference.Resolve<NewProjectPresenter>();
+
+            newProjectPresenter._new_Project.ShowDialogOfView();
            
 
         }

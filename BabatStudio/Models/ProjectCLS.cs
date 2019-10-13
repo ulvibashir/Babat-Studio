@@ -15,8 +15,7 @@ namespace BabatStudio
             ProjectFiles = new List<string>();
         }
 
-
-
+        
 
         public void Writer(bool subdirCheck)
         {
@@ -26,11 +25,15 @@ namespace BabatStudio
                 Path += $@"/{ProjectName}";
             }
 
+
+
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(ProjectCLS));
             using (TextWriter textWriter = new StreamWriter($@"{Path}/{ProjectName}"))
                 xmlSerializer.Serialize(textWriter, this);
 
         }
+
+
         public void AddFile(string name)
         {
             ProjectFiles.Add(name);
