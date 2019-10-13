@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 
 namespace BabatStudio
 {
-    class ProjectCLS
+    public class ProjectCLS
     {
         public string ProjectName { get; set; }
         public string Path { get; set; }
@@ -24,15 +25,28 @@ namespace BabatStudio
                 Directory.CreateDirectory($@"{Path}/{ProjectName}");
                 Path += $@"/{ProjectName}";
             }
-
-
+            
+            AddFile("Program.cs");
 
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(ProjectCLS));
-            using (TextWriter textWriter = new StreamWriter($@"{Path}/{ProjectName}"))
+            using (TextWriter textWriter = new StreamWriter($@"{Path}/{ProjectName}.bsln"))
                 xmlSerializer.Serialize(textWriter, this);
+
+            WriteFiles();
 
         }
 
+        public void WriteFiles()
+        {
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(String));
+            foreach (var item in ProjectFiles)
+            {
+                using (TextWriter textWriter = new StreamWriter($@"{Path}/{item}"))
+                    xmlSerializer.Serialize(textWriter, item);
+
+            }
+
+        }
 
         public void AddFile(string name)
         {

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BabatStudio.Interfaces;
+using BabatStudio.Services;
 
 namespace BabatStudio.Views
 {
@@ -48,7 +49,7 @@ namespace BabatStudio.Views
 
         public void BtnOK_Click(object sender, EventArgs e)
         {
-            OkEvent.Invoke(sender, e);
+            OkEvent.Invoke(sender,e);
         }
 
       
@@ -61,6 +62,15 @@ namespace BabatStudio.Views
         bool IView.ShowDialog()
         {
             return this.ShowDialog() == DialogResult.OK;
+        }
+
+        public ProjectInfo GetProjectInfo()
+        {
+            var projectInfo = IoC.Reference.Resolve<ProjectInfo>();
+            projectInfo.CreateSubdirCheck = chkCreateSubdir.Checked;
+            projectInfo.ProjectName = txtName.Text;
+            projectInfo.ProjectPath = txtFolder.Text;
+            return projectInfo;
         }
     }
 }

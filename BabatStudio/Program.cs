@@ -24,7 +24,8 @@ namespace BabatStudio
             IoC.Reference.Register<BabatStudioForm, IBabatStudioForm>()
                 .Register<New_ProjectForm, INew_Project>()
                 .Register<NewProjectPresenter>()
-                .Register<BabatStudioPresenter>().Build();
+                .Register<BabatStudioPresenter>()
+                .Register<ProjectInfo>().Build();
 
             BabatStudioPresenter babatStudioPresenter = new BabatStudioPresenter(new BabatStudioForm());
 

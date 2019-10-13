@@ -1,4 +1,6 @@
-﻿namespace BabatStudio.Views
+﻿using BabatStudio.Services;
+
+namespace BabatStudio.Views
 {
     partial class New_ProjectForm
     {

@@ -1,4 +1,5 @@
 ﻿using BabatStudio.Interfaces;
+using BabatStudio.Services;
 using System;
 
 namespace BabatStudio.Views
@@ -17,5 +18,6 @@ namespace BabatStudio.Views
         void BtnChoosefolder_Click(object sender, EventArgs e);
         void BtnOK_Click(object sender, EventArgs e);
         void ChkCreateSubdir_CheckedChanged(object sender, EventArgs e);
+        ProjectInfo GetProjectInfo();
     }
 }

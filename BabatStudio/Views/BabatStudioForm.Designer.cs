@@ -128,59 +128,59 @@
             // 
             this.createProjectToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("createProjectToolStripMenuItem.Image")));
             this.createProjectToolStripMenuItem.Name = "createProjectToolStripMenuItem";
-            this.createProjectToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.createProjectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.createProjectToolStripMenuItem.Text = "Create Project";
             // 
             // openProjectToolStripMenuItem
             // 
             this.openProjectToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openProjectToolStripMenuItem.Image")));
             this.openProjectToolStripMenuItem.Name = "openProjectToolStripMenuItem";
-            this.openProjectToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.openProjectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openProjectToolStripMenuItem.Text = "Open Project";
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(163, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(177, 6);
             // 
             // newFileToolStripMenuItem
             // 
             this.newFileToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("newFileToolStripMenuItem.Image")));
             this.newFileToolStripMenuItem.Name = "newFileToolStripMenuItem";
-            this.newFileToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.newFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.newFileToolStripMenuItem.Text = "New File";
             // 
             // openFileToolStripMenuItem
             // 
             this.openFileToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openFileToolStripMenuItem.Image")));
             this.openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
-            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openFileToolStripMenuItem.Text = "Open File";
             // 
             // saveFocusedFileToolStripMenuItem
             // 
             this.saveFocusedFileToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveFocusedFileToolStripMenuItem.Image")));
             this.saveFocusedFileToolStripMenuItem.Name = "saveFocusedFileToolStripMenuItem";
-            this.saveFocusedFileToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.saveFocusedFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveFocusedFileToolStripMenuItem.Text = "Save Focused File";
             // 
             // saveAllFilesToolStripMenuItem
             // 
             this.saveAllFilesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveAllFilesToolStripMenuItem.Image")));
             this.saveAllFilesToolStripMenuItem.Name = "saveAllFilesToolStripMenuItem";
-            this.saveAllFilesToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.saveAllFilesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveAllFilesToolStripMenuItem.Text = "Save All Files";
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(163, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(177, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exitToolStripMenuItem.Image")));
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // editToolStripMenuItem
@@ -559,6 +559,7 @@
             this.fastColoredTextBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fastColoredTextBox1.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fastColoredTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fastColoredTextBox1.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fastColoredTextBox1.IsReplaceMode = false;
             this.fastColoredTextBox1.Location = new System.Drawing.Point(3, 3);
             this.fastColoredTextBox1.Name = "fastColoredTextBox1";
@@ -594,13 +595,14 @@
         '\"',
         '\'',
         '\''};
-            this.fastColoredTextBox2.AutoScrollMinSize = new System.Drawing.Size(27, 28);
+            this.fastColoredTextBox2.AutoScrollMinSize = new System.Drawing.Size(2, 28);
             this.fastColoredTextBox2.BackBrush = null;
             this.fastColoredTextBox2.CharHeight = 14;
             this.fastColoredTextBox2.CharWidth = 8;
             this.fastColoredTextBox2.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fastColoredTextBox2.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fastColoredTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fastColoredTextBox2.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fastColoredTextBox2.IsReplaceMode = false;
             this.fastColoredTextBox2.Location = new System.Drawing.Point(3, 3);
             this.fastColoredTextBox2.Name = "fastColoredTextBox2";
@@ -645,7 +647,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 136F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 766F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 155F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 114F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 115F));
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 2, 0);
@@ -695,7 +697,7 @@
             this.label4.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.label4.Location = new System.Drawing.Point(1064, 8);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(108, 13);
+            this.label4.Size = new System.Drawing.Size(109, 13);
             this.label4.TabIndex = 3;
             this.label4.Text = "File";
             // 

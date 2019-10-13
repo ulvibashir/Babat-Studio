@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BabatStudio.Services;
+using System.Windows.Forms;
 
 namespace BabatStudio.Presenters
 {
@@ -36,22 +37,33 @@ namespace BabatStudio.Presenters
             _babatStudioForm.BuildEvent += BuildPR;
             _babatStudioForm.RunEvent += RunPR;
             _babatStudioForm.CommentEvent += CommentPR;
-
         }
 
         public void NewProjectPR(object sender, EventArgs e)
         {
             var newProjectPresenter = IoC.Reference.Resolve<NewProjectPresenter>();
+            var projectInfo  = IoC.Reference.Resolve<ProjectInfo>();
 
             if (newProjectPresenter._new_Project.ShowDialog())
             {
-
+                projectInfo = newProjectPresenter._new_Project.GetProjectInfo();
+                project.ProjectName = projectInfo.ProjectName;
+                project.Path = projectInfo.ProjectPath;
+                project.Writer(projectInfo.CreateSubdirCheck);
+                
             }
-
             
-           
 
         }
+
+        public void SetNewProjectForm(ProjectInfo projectInfo)
+        {
+            project.Path = projectInfo.ProjectPath;
+            project.ProjectName = projectInfo.ProjectName;
+            
+        }
+
+
         public void OpenProjectPR(object sender, EventArgs e)
         {
 
