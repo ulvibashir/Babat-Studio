@@ -55,7 +55,7 @@ namespace BabatStudio.Presenters
             {
                 mainService.MainProject.ProjectName = newProjectPresenter._newProjectForm.ProjectName;
                 mainService.MainProject.Path = newProjectPresenter._newProjectForm.ProjectPath;
-                mainService.Writer(newProjectPresenter._newProjectForm.IsSubdir);
+                mainService.WriteProject(newProjectPresenter._newProjectForm.IsSubdir);
             }
             Send();
         }
@@ -65,7 +65,7 @@ namespace BabatStudio.Presenters
         }
         private void _babatStudioForm_NewFileEvent(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            mainService.AddFile();
         }
         private void _babatStudioForm_OpenFileEvent(object sender, EventArgs e)
         {
@@ -105,11 +105,11 @@ namespace BabatStudio.Presenters
         }
         private void _babatStudioForm_CloseProjectEvent(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            
         }
         private void _babatStudioForm_ExitEvent(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            Environment.Exit(0);
         }
 
 

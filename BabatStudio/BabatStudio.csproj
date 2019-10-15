@@ -52,7 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Services\IMainService.cs" />
+    <Compile Include="Services\Interfaces\IMainService.cs" />
     <Compile Include="Views\Interfaces\IBabatStudioView.cs" />
     <Compile Include="Views\Interfaces\IView.cs" />
     <Compile Include="Models\ProjectCLS.cs" />
@@ -104,8 +104,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\Interfaces\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

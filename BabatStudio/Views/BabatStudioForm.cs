@@ -80,8 +80,6 @@ namespace BabatStudio
         {
             NewFileEvent.Invoke(sender, e);
             LoadTreeView();
-
-
         }
         public void OpenFileTL_Click(object sender, EventArgs e)
         {
@@ -128,8 +126,6 @@ namespace BabatStudio
         {
             NewProjectEvent.Invoke(sender, e);
             LoadTreeView();
-
-
         }
         private void OpenProjectMN_Click(object sender, EventArgs e)
         {
@@ -139,7 +135,7 @@ namespace BabatStudio
         private void NewFileMN_Click(object sender, EventArgs e)
         {
             NewFileEvent.Invoke(sender, e);
-            LoadTreeView();
+         
 
 
         }
@@ -216,9 +212,6 @@ namespace BabatStudio
         private void AddNewFileMN_project_Click(object sender, EventArgs e)
         {
             NewFileEvent.Invoke(sender, e);
-            LoadTreeView();
-
-
         }
         private void BuildMN_Click(object sender, EventArgs e)
         {
@@ -230,6 +223,7 @@ namespace BabatStudio
         }
         private void CloseMN_Click(object sender, EventArgs e)
         {
+            treeView1.Nodes.Clear();
             CloseProjectEvent.Invoke(sender, e);
         }
         #endregion
@@ -237,25 +231,23 @@ namespace BabatStudio
 
         public void LoadTreeView()
         {
-            
-            treeView1.BeginUpdate();
-
-            TreeNode rootnode = new TreeNode(Project.ProjectName);
-            rootnode.ImageIndex = 1;
-            rootnode.SelectedImageIndex = 1;
-
-            treeView1.Nodes.Add(rootnode);
-            
-
-
-            foreach (var item in Project.ProjectFiles)
+            if (Project.ProjectName != null)
             {
-                treeView1.Nodes[0].Nodes.Add(item.FileName);
-                rootnode.ImageIndex = 0;
-                rootnode.SelectedImageIndex = 0;
+                treeView1.Nodes.Clear();
+                TreeNode rootnode = new TreeNode(Project.ProjectName);
 
+                treeView1.Nodes.Add(rootnode);
+                rootnode.ImageIndex = 1;
+                rootnode.SelectedImageIndex = 1;
+                
+                foreach (var item in Project.ProjectFiles)
+                {
+                    rootnode.Nodes.Add(item.FileName);
+                    rootnode.ImageIndex = 0;
+                    rootnode.SelectedImageIndex = 0;
+                    
+                }
             }
-            treeView1.EndUpdate();
         }
         public void LoadImages()
         {

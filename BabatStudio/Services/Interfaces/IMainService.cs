@@ -7,6 +7,7 @@
         void AddFile(Files file);
         bool IsExist(string name);
         void WriteFiles();
-        void Writer(bool subdirCheck);
+        void WriteProject(bool subdirCheck);
+        void AddFile();
     }
 }
