@@ -21,15 +21,22 @@ namespace BabatStudio
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            IoC.Reference.Register<BabatStudioForm, IBabatStudioForm>()
+
+
+
+            IoC.Reference.Register<BabatStudioForm, IBabatStudioView>()
                 .Register<New_ProjectForm, INewProjectView>()
+                .Register<MainService, IMainService>()
                 .Register<NewProjectPresenter>()
                 .Register<BabatStudioPresenter>()
-                .Register<ProjectInfo>().Build();
+                .Register<ProjectCLS>()
+                .Build();
 
-            BabatStudioPresenter babatStudioPresenter = new BabatStudioPresenter(new BabatStudioForm());
 
-            Application.Run(babatStudioPresenter._babatStudioForm as BabatStudioForm);
+
+            BabatStudioPresenter babatStudioPresenter = IoC.Reference.Resolve<BabatStudioPresenter>();
+
+            Application.Run(babatStudioPresenter.babatStudioForm as BabatStudioForm);
         }
     }
 }

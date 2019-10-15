@@ -16,8 +16,9 @@ namespace BabatStudio.Views
     {
         public string ProjectName {get => txtName.Text; }
         public string ProjectPath { get => txtFolder.Text; set => txtFolder.Text = value; }
-        public bool HasSubdir { get => chkCreateSubdir.Checked; }
+        public bool IsSubdir { get => chkCreateSubdir.Checked; }
         
+        public event EventHandler ChooseFolderEvent;
 
         public New_ProjectForm()
         {
@@ -30,7 +31,6 @@ namespace BabatStudio.Views
             btnOK.DialogResult = DialogResult.OK;
         }
 
-        public event EventHandler ChooseFolderEvent;
 
         public void BtnChoosefolder_Click(object sender, EventArgs e)
         {

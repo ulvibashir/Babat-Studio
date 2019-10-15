@@ -11,98 +11,111 @@ namespace BabatStudio.Presenters
 {
     class BabatStudioPresenter
     {
-        public IBabatStudioForm _babatStudioForm { get; set; }
-        public ProjectCLS project = new ProjectCLS();
+        public IBabatStudioView babatStudioForm { get; set; }
+        public IMainService mainService { get; set; }
 
 
 
-        public BabatStudioPresenter(IBabatStudioForm babatStudioForm)
+        public BabatStudioPresenter(IBabatStudioView _babatStudioForm, IMainService _mainService)
         {
-            _babatStudioForm = babatStudioForm;
-
+            babatStudioForm = _babatStudioForm;
+            mainService = _mainService;
             Subscribe();
         }
 
         private void Subscribe()
         {
-            _babatStudioForm.NewProjectEvent += NewProjectPR;
-            _babatStudioForm.OpenProjectEvent += OpenProjectPR;
-            _babatStudioForm.NewFileEvent += NewFilePR;
-            _babatStudioForm.OpenFileEvent += OpenFilePR;
-            _babatStudioForm.SaveEvent += SavePR;
-            _babatStudioForm.SaveAllEvent += SaveAllPR;
-            _babatStudioForm.CutEvent += CutPR;
-            _babatStudioForm.CopyEvent += CopyPR;
-            _babatStudioForm.PasteEvent += PastePR;
-            _babatStudioForm.BuildEvent += BuildPR;
-            _babatStudioForm.RunEvent += RunPR;
-            _babatStudioForm.CommentEvent += CommentPR;
-        }
+            babatStudioForm.NewProjectEvent += _babatStudioForm_NewProjectEvent;
+            babatStudioForm.OpenProjectEvent += _babatStudioForm_OpenProjectEvent;
+            babatStudioForm.NewFileEvent += _babatStudioForm_NewFileEvent; 
+            babatStudioForm.OpenFileEvent += _babatStudioForm_OpenFileEvent; 
+            babatStudioForm.SaveEvent += _babatStudioForm_SaveEvent; 
+            babatStudioForm.SaveAllEvent += _babatStudioForm_SaveAllEvent; 
+            babatStudioForm.CutEvent += _babatStudioForm_CutEvent; 
+            babatStudioForm.CopyEvent += _babatStudioForm_CopyEvent; 
+            babatStudioForm.PasteEvent += _babatStudioForm_PasteEvent; 
+            babatStudioForm.BuildEvent += _babatStudioForm_BuildEvent; 
+            babatStudioForm.RunEvent += _babatStudioForm_RunEvent;
+            babatStudioForm.CommentEvent += _babatStudioForm_CommentEvent;
 
-        public void NewProjectPR(object sender, EventArgs e)
+            babatStudioForm.ExitEvent += _babatStudioForm_ExitEvent;
+            babatStudioForm.CloseProjectEvent += _babatStudioForm_CloseProjectEvent;
+        }
+        private void Send()
+        {
+            babatStudioForm.GetData(mainService.MainProject);
+        }
+        
+
+        private void _babatStudioForm_NewProjectEvent(object sender, EventArgs e)
         {
             var newProjectPresenter = IoC.Reference.Resolve<NewProjectPresenter>();
-            var projectInfo  = IoC.Reference.Resolve<ProjectInfo>();
 
             if (newProjectPresenter._newProjectForm.ShowDialog())
             {
-                project.ProjectName = newProjectPresenter._newProjectForm.ProjectName;
-                project.Path = newProjectPresenter._newProjectForm.ProjectPath;
-                project.Writer(newProjectPresenter._newProjectForm.HasSubdir);
+                mainService.MainProject.ProjectName = newProjectPresenter._newProjectForm.ProjectName;
+                mainService.MainProject.Path = newProjectPresenter._newProjectForm.ProjectPath;
+                mainService.Writer(newProjectPresenter._newProjectForm.IsSubdir);
             }
+            Send();
         }
-
-        public void SetNewProjectForm(ProjectInfo projectInfo)
+        private void _babatStudioForm_OpenProjectEvent(object sender, EventArgs e)
         {
-            project.Path = projectInfo.ProjectPath;
-            project.ProjectName = projectInfo.ProjectName;
-            
+            throw new NotImplementedException();
         }
-
-
-        public void OpenProjectPR(object sender, EventArgs e)
+        private void _babatStudioForm_NewFileEvent(object sender, EventArgs e)
         {
-
+            throw new NotImplementedException();
         }
-        public void NewFilePR(object sender, EventArgs e)
+        private void _babatStudioForm_OpenFileEvent(object sender, EventArgs e)
         {
-
+            throw new NotImplementedException();
         }
-        public void OpenFilePR(object sender, EventArgs e)
+        private void _babatStudioForm_SaveEvent(object sender, EventArgs e)
         {
-
+            throw new NotImplementedException();
         }
-        public void SavePR(object sender, EventArgs e)
+        private void _babatStudioForm_SaveAllEvent(object sender, EventArgs e)
         {
-
+            throw new NotImplementedException();
         }
-        public void SaveAllPR(object sender, EventArgs e)
+        private void _babatStudioForm_CutEvent(object sender, EventArgs e)
         {
-
+            throw new NotImplementedException();
         }
-        public void CutPR(object sender, EventArgs e)
+        private void _babatStudioForm_CopyEvent(object sender, EventArgs e)
         {
-
+            throw new NotImplementedException();
         }
-        public void CopyPR(object sender, EventArgs e)
+        private void _babatStudioForm_PasteEvent(object sender, EventArgs e)
         {
-
+            throw new NotImplementedException();
         }
-        public void PastePR(object sender, EventArgs e)
+        private void _babatStudioForm_BuildEvent(object sender, EventArgs e)
         {
-
+            throw new NotImplementedException();
         }
-        public void BuildPR(object sender, EventArgs e)
+        private void _babatStudioForm_RunEvent(object sender, EventArgs e)
         {
-
+            throw new NotImplementedException();
         }
-        public void RunPR(object sender, EventArgs e)
+        private void _babatStudioForm_CommentEvent(object sender, EventArgs e)
         {
-
+            throw new NotImplementedException();
         }
-        public void CommentPR(object sender, EventArgs e)
+        private void _babatStudioForm_CloseProjectEvent(object sender, EventArgs e)
         {
-
+            throw new NotImplementedException();
         }
+        private void _babatStudioForm_ExitEvent(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+
+
+        
+
+
     }
 }

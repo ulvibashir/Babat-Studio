@@ -9,60 +9,18 @@ namespace BabatStudio
     {
         public string ProjectName { get; set; }
         public string Path { get; set; }
-        public List<string> ProjectFiles { get; set; }
+        public List<Files> ProjectFiles { get; set; }
 
         public ProjectCLS()
         {
-            ProjectFiles = new List<string>();
+            ProjectFiles = new List<Files>();
         }
+    }
 
-        
-
-        public void Writer(bool subdirCheck)
-        {
-            if (subdirCheck)
-            {
-                Directory.CreateDirectory($@"{Path}/{ProjectName}");
-                Path += $@"/{ProjectName}";
-            }
-            
-            AddFile("Program.cs");
-
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(ProjectCLS));
-            using (TextWriter textWriter = new StreamWriter($@"{Path}/{ProjectName}.bsln"))
-                xmlSerializer.Serialize(textWriter, this);
-
-            WriteFiles();
-
-        }
-
-        public void WriteFiles()
-        {
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(String));
-            foreach (var item in ProjectFiles)
-            {
-                using (TextWriter textWriter = new StreamWriter($@"{Path}/{item}"))
-                    xmlSerializer.Serialize(textWriter, item);
-
-            }
-
-        }
-
-        public void AddFile(string name)
-        {
-            ProjectFiles.Add(name);
-        }
-        public bool IsExist(string name)
-        {
-            bool check = false;
-            foreach (var item in ProjectFiles)
-            {
-                if (item == name)
-                {
-                    check = true;
-                }
-            }
-            return check;
-        }
+    public class Files
+    {
+        public string FileName { get; set; }
+        public string FilePath { get; set; }
+        public string Data { get; set; }
     }
 }

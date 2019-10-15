@@ -8,7 +8,7 @@ using BabatStudio.Interfaces;
 
 namespace BabatStudio.Interfaces
 {
-    public interface IBabatStudioForm
+    public interface IBabatStudioView : IView
     {
         event EventHandler NewProjectEvent;
         event EventHandler OpenProjectEvent;
@@ -25,6 +25,16 @@ namespace BabatStudio.Interfaces
         event EventHandler BuildEvent;
         event EventHandler RunEvent;
         event EventHandler CommentEvent;
+        event EventHandler ExitEvent;
+       
+        event EventHandler CloseProjectEvent;
+
+
+
+
+
+
+
 
         void NewProjectTL_Click(object sender, EventArgs e);
         void OpenProjectTL_Click(object sender, EventArgs e);
@@ -41,5 +51,7 @@ namespace BabatStudio.Interfaces
         void BuildTL_Click(object sender, EventArgs e);
         void RunTL_Click(object sender, EventArgs e);
         void CommentTL_Click(object sender, EventArgs e);
+
+        void GetData(ProjectCLS _projectCLS);
     }
 }

@@ -52,13 +52,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IBabatStudioForm.cs" />
-    <Compile Include="Interfaces\IView.cs" />
+    <Compile Include="Services\IMainService.cs" />
+    <Compile Include="Views\Interfaces\IBabatStudioView.cs" />
+    <Compile Include="Views\Interfaces\IView.cs" />
     <Compile Include="Models\ProjectCLS.cs" />
     <Compile Include="Presenters\BabatStudioPresenter.cs" />
     <Compile Include="Presenters\NewProjectPresenter.cs" />
     <Compile Include="Services\IoC.cs" />
-    <Compile Include="Services\ProjectInfo.cs" />
+    <Compile Include="Services\MainService.cs" />
     <Compile Include="Views\BabatStudioForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,7 +68,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Interfaces\INewProjectView.cs" />
+    <Compile Include="Views\Interfaces\INewProjectView.cs" />
     <Compile Include="Views\NewProjectForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +104,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Services\Interfaces\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
