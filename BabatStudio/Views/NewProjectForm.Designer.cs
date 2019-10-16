@@ -86,6 +86,8 @@ namespace BabatStudio.Views
             // chkCreateSubdir
             // 
             this.chkCreateSubdir.AutoSize = true;
+            this.chkCreateSubdir.Checked = true;
+            this.chkCreateSubdir.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkCreateSubdir.Location = new System.Drawing.Point(27, 172);
             this.chkCreateSubdir.Name = "chkCreateSubdir";
             this.chkCreateSubdir.Size = new System.Drawing.Size(119, 17);

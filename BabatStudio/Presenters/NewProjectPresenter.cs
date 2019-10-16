@@ -27,7 +27,7 @@ namespace BabatStudio.Presenters
             using (var fbd = new FolderBrowserDialog())
             {
                 DialogResult result = fbd.ShowDialog();
-
+               
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                 {
                     _newProjectForm.ProjectPath = fbd.SelectedPath;

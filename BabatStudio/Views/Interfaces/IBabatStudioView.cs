@@ -51,7 +51,7 @@ namespace BabatStudio.Interfaces
         void BuildTL_Click(object sender, EventArgs e);
         void RunTL_Click(object sender, EventArgs e);
         void CommentTL_Click(object sender, EventArgs e);
-
+      
         void GetData(ProjectCLS _projectCLS);
     }
 }

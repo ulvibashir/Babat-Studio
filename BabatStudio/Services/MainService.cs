@@ -17,13 +17,13 @@ namespace BabatStudio.Services
         {
             Projectcls = new ProjectCLS();
         }
-        public void WriteProject(bool subdirCheck)
+        public void WriteNewProject(bool subdirCheck)
         {
-            
+            MainProject.ProjectFiles.Clear();
             if (subdirCheck)
             {
                 Directory.CreateDirectory($@"{MainProject.Path}\\{MainProject.ProjectName}");
-                MainProject.Path += $@"\\{MainProject.ProjectName}";
+                MainProject.Path += $@"\{MainProject.ProjectName}";
             }
 
             AddFile(new Files() {FileName = "Program.cs", FilePath = MainProject.Path});
@@ -65,6 +65,7 @@ namespace BabatStudio.Services
                 {
                     file.FilePath = Path.GetDirectoryName(svd.FileName);
                     file.FileName = Path.GetFileNameWithoutExtension(svd.FileName);
+                    file.FileName += ".cs";
                 }
             }
             if (file.FilePath == Projectcls.Path)
@@ -83,6 +84,31 @@ namespace BabatStudio.Services
                 }
             }
             return check;
+        }
+
+
+
+
+
+        public void LoadProject()
+        {
+
+            using (var fbd = new OpenFileDialog())
+            {
+                DialogResult result = fbd.ShowDialog();
+
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.FileName))
+                {
+                    MainProject.Path = Path.GetDirectoryName(fbd.FileName);
+                    MainProject.ProjectName = fbd.FileName;
+                }
+            }
+
+
+
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(ProjectCLS));
+            using (TextReader textReader = new StreamReader($@"{MainProject.Path}\\{MainProject.ProjectName}.bsln"))
+                Projectcls = (xmlSerializer.Deserialize(textReader)as ProjectCLS);
         }
     }
 }

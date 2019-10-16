@@ -27,7 +27,7 @@ namespace BabatStudio.Views
       
         private void New_Project_Load(object sender, EventArgs e)
         {
-            btnCancel.DialogResult = DialogResult.Cancel;
+            btnCancel.DialogResult = DialogResult.Cancel; 
             btnOK.DialogResult = DialogResult.OK;
         }
 

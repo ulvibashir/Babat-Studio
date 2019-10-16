@@ -55,13 +55,13 @@ namespace BabatStudio.Presenters
             {
                 mainService.MainProject.ProjectName = newProjectPresenter._newProjectForm.ProjectName;
                 mainService.MainProject.Path = newProjectPresenter._newProjectForm.ProjectPath;
-                mainService.WriteProject(newProjectPresenter._newProjectForm.IsSubdir);
+                mainService.WriteNewProject(newProjectPresenter._newProjectForm.IsSubdir);
             }
             Send();
         }
         private void _babatStudioForm_OpenProjectEvent(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            mainService.LoadProject();
         }
         private void _babatStudioForm_NewFileEvent(object sender, EventArgs e)
         {

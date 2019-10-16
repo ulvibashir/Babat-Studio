@@ -22,6 +22,8 @@ namespace BabatStudio
         public bool ErrorCollapseCheck { get; set; }
         public bool projectCollapseCheck { get; set; }
 
+        
+
         public event EventHandler NewProjectEvent;
         public event EventHandler OpenProjectEvent;
                
@@ -62,7 +64,7 @@ namespace BabatStudio
             return this.ShowDialog() == DialogResult.OK;
         }
 
-
+        
 
         #region ToolStrip Buttons
 
@@ -228,6 +230,23 @@ namespace BabatStudio
         }
         #endregion
 
+        public void GetData(ProjectCLS _projectCLS)
+        {
+            Project = _projectCLS;
+        }
+        public void LoadImages()
+        {
+            imageList.Images.Add("Parent", Image.FromFile(@"..\..\..\Images\Parent.png"));
+            imageList.Images.Add("Child", Image.FromFile(@"..\..\..\Images\Child.png"));
+            treeView1.ImageList = imageList;
+            treeView1.ImageIndex = 1;
+            treeView1.SelectedImageIndex = 1;
+
+        }
+
+
+
+
 
         public void LoadTreeView()
         {
@@ -249,21 +268,9 @@ namespace BabatStudio
                 }
             }
         }
-        public void LoadImages()
-        {
-            imageList.Images.Add("Parent", Image.FromFile(@"..\..\..\Images\Parent.png"));
-            imageList.Images.Add("Child", Image.FromFile(@"..\..\..\Images\Child.png"));
-            treeView1.ImageList = imageList;
-            treeView1.ImageIndex = 1;
-            treeView1.SelectedImageIndex = 1;
 
-        }
-
-
-        public void GetData(ProjectCLS _projectCLS)
-        {
-            Project = _projectCLS;
-        }
+       
+        
        
     }
 }
