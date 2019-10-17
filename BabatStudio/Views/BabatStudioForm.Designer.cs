@@ -73,6 +73,7 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.treeView1 = new System.Windows.Forms.TreeView();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -88,7 +89,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.tabControl2 = new System.Windows.Forms.TabControl();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -237,7 +237,7 @@
             this.ProjectTreeCollapseMN.Checked = true;
             this.ProjectTreeCollapseMN.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ProjectTreeCollapseMN.Name = "ProjectTreeCollapseMN";
-            this.ProjectTreeCollapseMN.Size = new System.Drawing.Size(190, 22);
+            this.ProjectTreeCollapseMN.Size = new System.Drawing.Size(191, 22);
             this.ProjectTreeCollapseMN.Text = "Project Tree Collapsed";
             this.ProjectTreeCollapseMN.Click += new System.EventHandler(this.ProjectTreeCollapseMN_Click);
             // 
@@ -246,7 +246,7 @@
             this.ErrorsTreeCollapseMN.Checked = true;
             this.ErrorsTreeCollapseMN.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ErrorsTreeCollapseMN.Name = "ErrorsTreeCollapseMN";
-            this.ErrorsTreeCollapseMN.Size = new System.Drawing.Size(190, 22);
+            this.ErrorsTreeCollapseMN.Size = new System.Drawing.Size(191, 22);
             this.ErrorsTreeCollapseMN.Text = "Errors Tree Collapsed";
             this.ErrorsTreeCollapseMN.Click += new System.EventHandler(this.ErrorsTreeCollapseMN_Click);
             // 
@@ -535,6 +535,16 @@
             this.treeView1.Name = "treeView1";
             this.treeView1.Size = new System.Drawing.Size(175, 529);
             this.treeView1.TabIndex = 0;
+            this.treeView1.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
+            // 
+            // tabControl2
+            // 
+            this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl2.Location = new System.Drawing.Point(0, 0);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(1008, 529);
+            this.tabControl2.TabIndex = 0;
             // 
             // tabControl1
             // 
@@ -569,7 +579,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 136F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 766F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 155F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 122F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 124F));
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 2, 0);
@@ -619,7 +629,7 @@
             this.label4.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.label4.Location = new System.Drawing.Point(1064, 8);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(116, 13);
+            this.label4.Size = new System.Drawing.Size(118, 13);
             this.label4.TabIndex = 3;
             this.label4.Text = "File";
             // 
@@ -643,7 +653,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 136F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 766F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 155F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 122F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 124F));
             this.tableLayoutPanel2.Controls.Add(this.label5, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.label6, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.label7, 2, 0);
@@ -693,7 +703,7 @@
             this.label8.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.label8.Location = new System.Drawing.Point(1064, 8);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(116, 13);
+            this.label8.Size = new System.Drawing.Size(118, 13);
             this.label8.TabIndex = 3;
             this.label8.Text = "File";
             // 
@@ -717,15 +727,6 @@
             this.richTextBox1.Size = new System.Drawing.Size(1173, 75);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
-            // 
-            // tabControl2
-            // 
-            this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl2.Location = new System.Drawing.Point(0, 0);
-            this.tabControl2.Name = "tabControl2";
-            this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(1008, 529);
-            this.tabControl2.TabIndex = 0;
             // 
             // BabatStudioForm
             // 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using BabatStudio.Interfaces;
 
 
@@ -26,11 +27,11 @@ namespace BabatStudio.Interfaces
         event EventHandler RunEvent;
         event EventHandler CommentEvent;
         event EventHandler ExitEvent;
-       
         event EventHandler CloseProjectEvent;
+        event EventHandler TreeViewDoubleClickEvent;
 
-        event Action ProjectCollapse;
-        event Action TreeCollapse;
+        event Action ProjectCollapseEvent;
+        event Action TreeCollapseEvent;
 
 
 
@@ -62,8 +63,9 @@ namespace BabatStudio.Interfaces
         void TreeCollapseDo();
         void ProjectCollapseDo();
 
-
+        void TreeViewDoubleClickDo(object sender, TreeNodeMouseClickEventArgs e);
         void CreateTab(Files file);
+        void CloseProject();
 
 
 

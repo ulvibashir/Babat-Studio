@@ -12,10 +12,12 @@ namespace BabatStudio.Services
     public class MainService : IMainService
     {
         private ProjectCLS Projectcls;
+        private string DataTxt { get; set; }
         public ProjectCLS MainProject { get => Projectcls; set => Projectcls = value; }
         public MainService()
         {
             Projectcls = new ProjectCLS();
+            GetTxtData();
         }
         public void WriteNewProject(bool subdirCheck)
         {
@@ -26,7 +28,7 @@ namespace BabatStudio.Services
                 MainProject.Path += $@"\{MainProject.ProjectName}";
             }
 
-            AddFile(new Files() {FileName = "Program.cs", FilePath = MainProject.Path});
+            AddFile(new Files() {FileName = "Program.cs", FilePath = MainProject.Path, Data = DataTxt});
 
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(ProjectCLS));
             using (TextWriter textWriter = new StreamWriter($@"{MainProject.Path}\\{MainProject.ProjectName}.bsln"))
@@ -91,6 +93,7 @@ namespace BabatStudio.Services
         }
 
 
+
         private void UpdateBsln()
         {
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(ProjectCLS));
@@ -118,8 +121,6 @@ namespace BabatStudio.Services
                 }
             }
 
-
-
         }
 
         public void SaveFile()
@@ -130,6 +131,11 @@ namespace BabatStudio.Services
         public void SaveAllFile()
         {
             WriteFiles();
+        }
+        private void GetTxtData()
+        {
+            using (TextReader textReader = new StreamReader($@"..\..\..\DataFiles\DataFiles.txt"))
+                DataTxt = textReader.ReadToEnd();
         }
     }
 }

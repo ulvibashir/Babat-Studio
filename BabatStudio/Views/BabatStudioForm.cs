@@ -46,8 +46,9 @@ namespace BabatStudio
         public event EventHandler ExitEvent;
         public event EventHandler CloseProjectEvent;
 
-        public event Action ProjectCollapse;
-        public event Action TreeCollapse;
+        public event Action ProjectCollapseEvent;
+        public event Action TreeCollapseEvent;
+        public event EventHandler TreeViewDoubleClickEvent;
 
         public BabatStudioForm()
         {
@@ -83,26 +84,7 @@ namespace BabatStudio
             treeView1.SelectedImageIndex = 1;
 
         }
-        public void LoadTreeView()
-        {
-            if (Project.ProjectName != null)
-            {
-                treeView1.Nodes.Clear();
-                TreeNode rootnode = new TreeNode(Project.ProjectName);
-
-                treeView1.Nodes.Add(rootnode);
-                rootnode.ImageIndex = 1;
-                rootnode.SelectedImageIndex = 1;
-
-                foreach (var item in Project.ProjectFiles)
-                {
-                    rootnode.Nodes.Add(item.FileName);
-                    rootnode.ImageIndex = 0;
-                    rootnode.SelectedImageIndex = 0;
-
-                }
-            }
-        }
+        
         #endregion
 
         #region ToolStrip Buttons
@@ -217,11 +199,11 @@ namespace BabatStudio
         #region MenuStrip View
         private void ProjectTreeCollapseMN_Click(object sender, EventArgs e)
         {
-            ProjectCollapse.Invoke();
+            ProjectCollapseEvent.Invoke();
         }
         private void ErrorsTreeCollapseMN_Click(object sender, EventArgs e)
         {
-            TreeCollapse.Invoke();
+            TreeCollapseEvent.Invoke();
         }
 
 
@@ -287,6 +269,14 @@ namespace BabatStudio
 
         #endregion
 
+        private void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            TreeViewDoubleClickEvent.Invoke(sender, e);
+        }
+        public void TreeViewDoubleClickDo(object sender, TreeNodeMouseClickEventArgs e)
+        {
+
+        }
         public void CreateTab(Files file)
         {
             TabPage tabPage = new TabPage();
@@ -303,9 +293,33 @@ namespace BabatStudio
 
         }
 
+        public void LoadTreeView()
+        {
+            if (Project.ProjectName != null)
+            {
+                treeView1.Nodes.Clear();
+                TreeNode rootnode = new TreeNode(Project.ProjectName);
 
+                treeView1.Nodes.Add(rootnode);
+                rootnode.ImageIndex = 1;
+                rootnode.SelectedImageIndex = 1;
 
+                foreach (var item in Project.ProjectFiles)
+                {
+                    rootnode.Nodes.Add(item.FileName);
+                    rootnode.ImageIndex = 0;
+                    rootnode.SelectedImageIndex = 0;
 
+                }
+            }
+        }
+        public void CloseProject()
+        {
+            tabControl2.TabPages.Clear();
+            treeView1.Nodes.Clear();
+            Project = null;
+
+        }
 
     }
 }

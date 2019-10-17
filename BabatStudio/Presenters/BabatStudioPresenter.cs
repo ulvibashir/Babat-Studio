@@ -41,12 +41,16 @@ namespace BabatStudio.Presenters
             babatStudioForm.ExitEvent += _babatStudioForm_ExitEvent;
             babatStudioForm.CloseProjectEvent += _babatStudioForm_CloseProjectEvent;
 
-            babatStudioForm.TreeCollapse += BabatStudioForm_TreeCollapse;
-            babatStudioForm.ProjectCollapse += BabatStudioForm_ProjectCollapse;
+            babatStudioForm.TreeCollapseEvent += BabatStudioForm_TreeCollapse;
+            babatStudioForm.ProjectCollapseEvent += BabatStudioForm_ProjectCollapse;
+            babatStudioForm.TreeViewDoubleClickEvent += BabatStudioForm_TreeViewDoubleClickEvent;
 
         }
 
-       
+        private void BabatStudioForm_TreeViewDoubleClickEvent(object sender, EventArgs e)
+        {
+            //..run();
+        }
 
         private void Send()
         {
@@ -63,18 +67,20 @@ namespace BabatStudio.Presenters
                 mainService.MainProject.ProjectName = newProjectPresenter._newProjectForm.ProjectName;
                 mainService.MainProject.Path = newProjectPresenter._newProjectForm.ProjectPath;
                 mainService.WriteNewProject(newProjectPresenter._newProjectForm.IsSubdir);
+                Send();
+                babatStudioForm.CreateTab(mainService.MainProject.ProjectFiles[0]);
             }
-            Send();
-            babatStudioForm.CreateTab(mainService.MainProject.ProjectFiles[0]);
         }
         private void _babatStudioForm_OpenProjectEvent(object sender, EventArgs e)
         {
             mainService.LoadProject();
+            babatStudioForm.CreateTab(mainService.MainProject.ProjectFiles[0]);
             Send();
         }
         private void _babatStudioForm_NewFileEvent(object sender, EventArgs e)
         {
             mainService.AddFile();
+            babatStudioForm.CreateTab(mainService.MainProject.ProjectFiles[mainService.MainProject.ProjectFiles.Count - 1]);
         }
         private void _babatStudioForm_OpenFileEvent(object sender, EventArgs e)
         {
@@ -114,7 +120,7 @@ namespace BabatStudio.Presenters
         }
         private void _babatStudioForm_CloseProjectEvent(object sender, EventArgs e)
         {
-            
+            babatStudioForm.CloseProject();
         }
         private void BabatStudioForm_ProjectCollapse()
         {
