@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.CSharp;
+using FastColoredTextBoxNS;
 
 
 
@@ -45,6 +46,9 @@ namespace BabatStudio
         public event EventHandler ExitEvent;
         public event EventHandler CloseProjectEvent;
 
+        public event Action ProjectCollapse;
+        public event Action TreeCollapse;
+
         public BabatStudioForm()
         {
             InitializeComponent();
@@ -59,12 +63,47 @@ namespace BabatStudio
             
         }
 
+
+        #region Some Activity
         bool IView.ShowDialog()
         {
             return this.ShowDialog() == DialogResult.OK;
         }
+        public void GetData(ProjectCLS _projectCLS)
+        {
+            Project = _projectCLS;
+            LoadTreeView();
+        }
+        public void LoadImages()
+        {
+            imageList.Images.Add("Parent", Image.FromFile(@"..\..\..\Images\Parent.png"));
+            imageList.Images.Add("Child", Image.FromFile(@"..\..\..\Images\Child.png"));
+            treeView1.ImageList = imageList;
+            treeView1.ImageIndex = 1;
+            treeView1.SelectedImageIndex = 1;
 
-        
+        }
+        public void LoadTreeView()
+        {
+            if (Project.ProjectName != null)
+            {
+                treeView1.Nodes.Clear();
+                TreeNode rootnode = new TreeNode(Project.ProjectName);
+
+                treeView1.Nodes.Add(rootnode);
+                rootnode.ImageIndex = 1;
+                rootnode.SelectedImageIndex = 1;
+
+                foreach (var item in Project.ProjectFiles)
+                {
+                    rootnode.Nodes.Add(item.FileName);
+                    rootnode.ImageIndex = 0;
+                    rootnode.SelectedImageIndex = 0;
+
+                }
+            }
+        }
+        #endregion
 
         #region ToolStrip Buttons
 
@@ -131,7 +170,7 @@ namespace BabatStudio
         }
         private void OpenProjectMN_Click(object sender, EventArgs e)
         {
-            OpenFileEvent.Invoke(sender, e);
+            OpenProjectEvent.Invoke(sender, e);
         }
 
         private void NewFileMN_Click(object sender, EventArgs e)
@@ -178,6 +217,17 @@ namespace BabatStudio
         #region MenuStrip View
         private void ProjectTreeCollapseMN_Click(object sender, EventArgs e)
         {
+            ProjectCollapse.Invoke();
+        }
+        private void ErrorsTreeCollapseMN_Click(object sender, EventArgs e)
+        {
+            TreeCollapse.Invoke();
+        }
+
+
+
+        public void ProjectCollapseDo()
+        {
             if (projectCollapseCheck)
             {
                 splitContainer2.Panel1Collapsed = false;
@@ -192,7 +242,9 @@ namespace BabatStudio
 
             }
         }
-        private void ErrorsTreeCollapseMN_Click(object sender, EventArgs e)
+
+
+        public void TreeCollapseDo()
         {
             if (ErrorCollapseCheck)
             {
@@ -208,6 +260,10 @@ namespace BabatStudio
 
             }
         }
+
+
+
+
         #endregion
 
         #region MenuStrip Project
@@ -228,49 +284,28 @@ namespace BabatStudio
             treeView1.Nodes.Clear();
             CloseProjectEvent.Invoke(sender, e);
         }
+
         #endregion
 
-        public void GetData(ProjectCLS _projectCLS)
+        public void CreateTab(Files file)
         {
-            Project = _projectCLS;
-        }
-        public void LoadImages()
-        {
-            imageList.Images.Add("Parent", Image.FromFile(@"..\..\..\Images\Parent.png"));
-            imageList.Images.Add("Child", Image.FromFile(@"..\..\..\Images\Child.png"));
-            treeView1.ImageList = imageList;
-            treeView1.ImageIndex = 1;
-            treeView1.SelectedImageIndex = 1;
+            TabPage tabPage = new TabPage();
+            
+            FastColoredTextBox fastColoredText = new FastColoredTextBox();
+            fastColoredText.Dock = DockStyle.Fill;
+            fastColoredText.Language = Language.CSharp;
+            fastColoredText.Text = file.Data;
+            tabPage.Text = file.FileName;
+            tabPage.BorderStyle = BorderStyle.FixedSingle;
+            tabPage.Controls.Add(fastColoredText);
+            tabControl2.TabPages.Add(tabPage);
+            
 
-        }
-
-
-
-
-
-        public void LoadTreeView()
-        {
-            if (Project.ProjectName != null)
-            {
-                treeView1.Nodes.Clear();
-                TreeNode rootnode = new TreeNode(Project.ProjectName);
-
-                treeView1.Nodes.Add(rootnode);
-                rootnode.ImageIndex = 1;
-                rootnode.SelectedImageIndex = 1;
-                
-                foreach (var item in Project.ProjectFiles)
-                {
-                    rootnode.Nodes.Add(item.FileName);
-                    rootnode.ImageIndex = 0;
-                    rootnode.SelectedImageIndex = 0;
-                    
-                }
-            }
         }
 
-       
-        
-       
+
+
+
+
     }
 }

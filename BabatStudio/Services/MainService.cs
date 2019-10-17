@@ -61,16 +61,20 @@ namespace BabatStudio.Services
             using (var svd = new SaveFileDialog())
             {
                 svd.Filter = "CSharp file|*.cs";
-                if (svd.ShowDialog() == DialogResult.OK)
+
+                DialogResult result = svd.ShowDialog();
+                if (result == DialogResult.OK)
                 {
                     file.FilePath = Path.GetDirectoryName(svd.FileName);
                     file.FileName = Path.GetFileNameWithoutExtension(svd.FileName);
                     file.FileName += ".cs";
+
+                    if (file.FilePath == Projectcls.Path)
+                    {
+                        AddFile(file);
+                        UpdateBsln();
+                    }
                 }
-            }
-            if (file.FilePath == Projectcls.Path)
-            {
-                AddFile(file);
             }
         }
         public bool IsExist(string name)
@@ -87,7 +91,12 @@ namespace BabatStudio.Services
         }
 
 
-
+        private void UpdateBsln()
+        {
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(ProjectCLS));
+            using (TextWriter textWriter = new StreamWriter($@"{MainProject.Path}\\{MainProject.ProjectName}.bsln"))
+                xmlSerializer.Serialize(textWriter, Projectcls);
+        }
 
 
         public void LoadProject()
@@ -96,19 +105,31 @@ namespace BabatStudio.Services
             using (var fbd = new OpenFileDialog())
             {
                 DialogResult result = fbd.ShowDialog();
-
-                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.FileName))
+                //fbd.Filter = "BSLN file|*.bsln";
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.FileName) && fbd.FileName.Contains(".bsln"))
                 {
                     MainProject.Path = Path.GetDirectoryName(fbd.FileName);
-                    MainProject.ProjectName = fbd.FileName;
+                    MainProject.ProjectName = Path.GetFileNameWithoutExtension(fbd.FileName);
+                    XmlSerializer xmlSerializer = new XmlSerializer(typeof(ProjectCLS));
+                    using (TextReader textReader = new StreamReader($@"{MainProject.Path}\\{MainProject.ProjectName}.bsln"))
+                        Projectcls = (xmlSerializer.Deserialize(textReader) as ProjectCLS);
+
+
                 }
             }
 
 
 
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(ProjectCLS));
-            using (TextReader textReader = new StreamReader($@"{MainProject.Path}\\{MainProject.ProjectName}.bsln"))
-                Projectcls = (xmlSerializer.Deserialize(textReader)as ProjectCLS);
+        }
+
+        public void SaveFile()
+        {
+            UpdateBsln();
+        }
+
+        public void SaveAllFile()
+        {
+            WriteFiles();
         }
     }
 }

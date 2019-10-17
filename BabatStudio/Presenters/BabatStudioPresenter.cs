@@ -40,7 +40,14 @@ namespace BabatStudio.Presenters
 
             babatStudioForm.ExitEvent += _babatStudioForm_ExitEvent;
             babatStudioForm.CloseProjectEvent += _babatStudioForm_CloseProjectEvent;
+
+            babatStudioForm.TreeCollapse += BabatStudioForm_TreeCollapse;
+            babatStudioForm.ProjectCollapse += BabatStudioForm_ProjectCollapse;
+
         }
+
+       
+
         private void Send()
         {
             babatStudioForm.GetData(mainService.MainProject);
@@ -58,10 +65,12 @@ namespace BabatStudio.Presenters
                 mainService.WriteNewProject(newProjectPresenter._newProjectForm.IsSubdir);
             }
             Send();
+            babatStudioForm.CreateTab(mainService.MainProject.ProjectFiles[0]);
         }
         private void _babatStudioForm_OpenProjectEvent(object sender, EventArgs e)
         {
             mainService.LoadProject();
+            Send();
         }
         private void _babatStudioForm_NewFileEvent(object sender, EventArgs e)
         {
@@ -73,11 +82,11 @@ namespace BabatStudio.Presenters
         }
         private void _babatStudioForm_SaveEvent(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            mainService.SaveFile();
         }
         private void _babatStudioForm_SaveAllEvent(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            mainService.SaveAllFile();
         }
         private void _babatStudioForm_CutEvent(object sender, EventArgs e)
         {
@@ -106,6 +115,15 @@ namespace BabatStudio.Presenters
         private void _babatStudioForm_CloseProjectEvent(object sender, EventArgs e)
         {
             
+        }
+        private void BabatStudioForm_ProjectCollapse()
+        {
+            babatStudioForm.ProjectCollapseDo();
+        }
+
+        private void BabatStudioForm_TreeCollapse()
+        {
+            babatStudioForm.TreeCollapseDo();
         }
         private void _babatStudioForm_ExitEvent(object sender, EventArgs e)
         {

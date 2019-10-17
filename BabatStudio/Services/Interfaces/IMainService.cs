@@ -10,5 +10,7 @@
         void WriteNewProject(bool subdirCheck);
         void AddFile();
         void LoadProject();
+        void SaveFile();
+        void SaveAllFile();
     }
 }

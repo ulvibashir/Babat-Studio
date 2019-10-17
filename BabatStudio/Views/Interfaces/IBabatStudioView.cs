@@ -29,6 +29,12 @@ namespace BabatStudio.Interfaces
        
         event EventHandler CloseProjectEvent;
 
+        event Action ProjectCollapse;
+        event Action TreeCollapse;
+
+
+
+
 
 
 
@@ -53,5 +59,13 @@ namespace BabatStudio.Interfaces
         void CommentTL_Click(object sender, EventArgs e);
       
         void GetData(ProjectCLS _projectCLS);
+        void TreeCollapseDo();
+        void ProjectCollapseDo();
+
+
+        void CreateTab(Files file);
+
+
+
     }
 }
