@@ -30,8 +30,8 @@ namespace BabatStudio
                
         public event EventHandler NewFileEvent;
         public event EventHandler OpenFileEvent;
-        public event EventHandler SaveEvent;
-        public event EventHandler SaveAllEvent;
+        public event EventHandler<ProjectCLS> SaveEvent;
+        public event EventHandler<ProjectCLS> SaveAllEvent;
                
         public event EventHandler CutEvent;
         public event EventHandler CopyEvent;
@@ -40,7 +40,7 @@ namespace BabatStudio
         public event EventHandler BuildEvent;
         public event EventHandler RunEvent;
         public event EventHandler CommentEvent;
-
+        
         
 
         public event EventHandler ExitEvent;
@@ -48,7 +48,7 @@ namespace BabatStudio
 
         public event Action ProjectCollapseEvent;
         public event Action TreeCollapseEvent;
-        public event EventHandler TreeViewDoubleClickEvent;
+        public event EventHandler<TreeNodeMouseClickEventArgs> TreeViewDoubleClickEvent;
 
         public BabatStudioForm()
         {
@@ -84,6 +84,10 @@ namespace BabatStudio
             treeView1.SelectedImageIndex = 1;
 
         }
+        private void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            TreeViewDoubleClickEvent.Invoke(sender, e);
+        }
         
         #endregion
 
@@ -91,12 +95,16 @@ namespace BabatStudio
 
         public void NewProjectTL_Click(object sender, EventArgs e)
         {
+            tabControl2.TabPages.Clear();
             NewProjectEvent.Invoke(sender, e);
             LoadTreeView();
         }
         public void OpenProjectTL_Click(object sender, EventArgs e)
         {
+            tabControl2.TabPages.Clear();
             OpenProjectEvent.Invoke(sender, e);
+            LoadTreeView();
+
         }
 
         public void NewFileTL_Click(object sender, EventArgs e)
@@ -110,11 +118,13 @@ namespace BabatStudio
         }
         public void SaveTL_Click(object sender, EventArgs e)
         {
-            SaveEvent.Invoke(sender, e);
+            CheckUppdateTextOne();
+            SaveEvent.Invoke(sender, Project);
         }
         public void SaveSaveAll_TL_Click(object sender, EventArgs e)
         {
-            SaveAllEvent.Invoke(sender, e);
+            CheckUppdateTextAll();
+            SaveAllEvent.Invoke(sender, Project);
         }
 
         public void CutTL_Click(object sender, EventArgs e)
@@ -158,9 +168,6 @@ namespace BabatStudio
         private void NewFileMN_Click(object sender, EventArgs e)
         {
             NewFileEvent.Invoke(sender, e);
-         
-
-
         }
         private void OpenFileMN_Click(object sender, EventArgs e)
         {
@@ -168,11 +175,15 @@ namespace BabatStudio
         }
         private void SaveMN_Click(object sender, EventArgs e)
         {
-            SaveEvent.Invoke(sender, e);
+            CheckUppdateTextOne();
+
+            SaveEvent.Invoke(sender, Project);
         }
         private void SaveAll_Click(object sender, EventArgs e)
         {
-            SaveAllEvent.Invoke(sender, e);
+            CheckUppdateTextAll();
+
+            SaveAllEvent.Invoke(sender, Project);
         }
         private void ExitMN_Click(object sender, EventArgs e)
         {
@@ -269,19 +280,35 @@ namespace BabatStudio
 
         #endregion
 
-        private void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            TreeViewDoubleClickEvent.Invoke(sender, e);
-        }
         public void TreeViewDoubleClickDo(object sender, TreeNodeMouseClickEventArgs e)
         {
+            bool check = false;
+            foreach (var item in Project.ProjectFiles)
+            {
+                if(e.Node.Text == item.FileName)
+                {
 
+                    foreach (var itemTab in tabControl2.TabPages)
+                    {
+                        if((itemTab as TabPage).Text == item.FileName)
+                        {
+                            tabControl2.SelectedTab = (itemTab as TabPage);
+                            check = true;
+                        } 
+                    }
+
+
+                    if (!check)
+                        CreateTab(item);
+                }
+            }
         }
         public void CreateTab(Files file)
         {
             TabPage tabPage = new TabPage();
             
             FastColoredTextBox fastColoredText = new FastColoredTextBox();
+            fastColoredText.TextChanged += FastColoredText_TextChanged;
             fastColoredText.Dock = DockStyle.Fill;
             fastColoredText.Language = Language.CSharp;
             fastColoredText.Text = file.Data;
@@ -289,11 +316,22 @@ namespace BabatStudio
             tabPage.BorderStyle = BorderStyle.FixedSingle;
             tabPage.Controls.Add(fastColoredText);
             tabControl2.TabPages.Add(tabPage);
+            tabControl2.SelectedTab = tabControl2.TabPages[tabControl2.TabPages.Count - 1];
             
 
         }
 
-        public void LoadTreeView()
+        private void FastColoredText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (Project.ProjectName != null)
+            {
+
+                CheckUppdateTextAll();
+                SaveAllEvent.Invoke(sender, Project);
+            }
+        }
+
+        private void LoadTreeView()
         {
             if (Project.ProjectName != null)
             {
@@ -311,6 +349,7 @@ namespace BabatStudio
                     rootnode.SelectedImageIndex = 0;
 
                 }
+                treeView1.ExpandAll();
             }
         }
         public void CloseProject()
@@ -319,6 +358,33 @@ namespace BabatStudio
             treeView1.Nodes.Clear();
             Project = null;
 
+        }
+
+        private void CheckUppdateTextOne()
+        {
+            foreach (var item in Project.ProjectFiles)
+            {
+                if(tabControl2.SelectedTab.Text == item.FileName)
+                {
+                    item.Data = tabControl2.SelectedTab.Controls[0].Text;
+                }
+            }
+        }
+
+
+
+        private void CheckUppdateTextAll()
+        {
+            foreach (var item in tabControl2.TabPages)
+            {
+                foreach (var itemFile in Project.ProjectFiles)
+                {
+                    if((item as TabPage).Text == itemFile.FileName)
+                    {
+                        itemFile.Data = (item as TabPage).Controls[0].Text;
+                    }
+                }
+            }
         }
 
     }

@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.CSharp;
+using System.CodeDom.Compiler;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 
@@ -12,13 +11,14 @@ namespace BabatStudio.Services
     public class MainService : IMainService
     {
         private ProjectCLS Projectcls;
-        private string DataTxt { get; set; }
+        private string DataCs { get; set; }
         public ProjectCLS MainProject { get => Projectcls; set => Projectcls = value; }
         public MainService()
         {
             Projectcls = new ProjectCLS();
-            GetTxtData();
+            GetCsData();
         }
+
         public void WriteNewProject(bool subdirCheck)
         {
             MainProject.ProjectFiles.Clear();
@@ -28,7 +28,7 @@ namespace BabatStudio.Services
                 MainProject.Path += $@"\{MainProject.ProjectName}";
             }
 
-            AddFile(new Files() {FileName = "Program.cs", FilePath = MainProject.Path, Data = DataTxt});
+            AddFile(new Files() {FileName = "Program.cs", FilePath = MainProject.Path, Data = DataCs});
 
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(ProjectCLS));
             using (TextWriter textWriter = new StreamWriter($@"{MainProject.Path}\\{MainProject.ProjectName}.bsln"))
@@ -37,7 +37,6 @@ namespace BabatStudio.Services
             
 
         }
-
         public void WriteFiles()
         {
             if (MainProject.Path != null)
@@ -50,7 +49,6 @@ namespace BabatStudio.Services
                 }
             }
         }
-
         public void AddFile(Files file)
         {
             MainProject.ProjectFiles.Add(file);
@@ -58,6 +56,7 @@ namespace BabatStudio.Services
         }
         public void AddFile()
         {
+            
             Files file = new Files();
 
             using (var svd = new SaveFileDialog())
@@ -70,7 +69,8 @@ namespace BabatStudio.Services
                     file.FilePath = Path.GetDirectoryName(svd.FileName);
                     file.FileName = Path.GetFileNameWithoutExtension(svd.FileName);
                     file.FileName += ".cs";
-
+                    file.Data = DataCs;
+                    
                     if (file.FilePath == Projectcls.Path)
                     {
                         AddFile(file);
@@ -79,30 +79,13 @@ namespace BabatStudio.Services
                 }
             }
         }
-        public bool IsExist(string name)
-        {
-            bool check = false;
-            foreach (var item in MainProject.ProjectFiles)
-            {
-                if (item.FileName == name)
-                {
-                    check = true;
-                }
-            }
-            return check;
-        }
-
-
-
         private void UpdateBsln()
         {
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(ProjectCLS));
             using (TextWriter textWriter = new StreamWriter($@"{MainProject.Path}\\{MainProject.ProjectName}.bsln"))
                 xmlSerializer.Serialize(textWriter, Projectcls);
         }
-
-
-        public void LoadProject()
+        public bool LoadProject()
         {
 
             using (var fbd = new OpenFileDialog())
@@ -111,31 +94,56 @@ namespace BabatStudio.Services
                 //fbd.Filter = "BSLN file|*.bsln";
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.FileName) && fbd.FileName.Contains(".bsln"))
                 {
+                    
                     MainProject.Path = Path.GetDirectoryName(fbd.FileName);
                     MainProject.ProjectName = Path.GetFileNameWithoutExtension(fbd.FileName);
                     XmlSerializer xmlSerializer = new XmlSerializer(typeof(ProjectCLS));
                     using (TextReader textReader = new StreamReader($@"{MainProject.Path}\\{MainProject.ProjectName}.bsln"))
                         Projectcls = (xmlSerializer.Deserialize(textReader) as ProjectCLS);
 
-
+                    return true;
                 }
             }
-
+            return false;
         }
-
         public void SaveFile()
         {
             UpdateBsln();
-        }
-
-        public void SaveAllFile()
-        {
             WriteFiles();
         }
-        private void GetTxtData()
+        private void GetCsData()
         {
-            using (TextReader textReader = new StreamReader($@"..\..\..\DataFiles\DataFiles.txt"))
-                DataTxt = textReader.ReadToEnd();
+            using (TextReader textReader = new StreamReader($@"..\..\..\DataFiles\DataFiles.cs"))
+                DataCs = textReader.ReadToEnd();
         }
+        public CompilerResults compilerResults(string[] sources, string output, params string[] references)
+        {
+            var parameters = new CompilerParameters(references, output);
+            parameters.GenerateExecutable = true;
+            using (var provider = new CSharpCodeProvider())
+                return provider.CompileAssemblyFromSource(parameters, sources);
+
+        }
+
+        public void Build()
+        {
+            string[] sources = new string[Projectcls.ProjectFiles.Count];
+            int i = 0;
+            foreach (var item in Projectcls.ProjectFiles)
+            {
+
+                sources[i] = item.Data;
+                i++;
+            }
+            var result = compilerResults(sources, "compile.exe");
+            
+        }
+
+        public void Run()
+        {
+            Build();
+            Process.Start("compile.exe");
+        }
+        
     }
 }

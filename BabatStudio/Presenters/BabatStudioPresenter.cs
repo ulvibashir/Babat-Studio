@@ -44,12 +44,12 @@ namespace BabatStudio.Presenters
             babatStudioForm.TreeCollapseEvent += BabatStudioForm_TreeCollapse;
             babatStudioForm.ProjectCollapseEvent += BabatStudioForm_ProjectCollapse;
             babatStudioForm.TreeViewDoubleClickEvent += BabatStudioForm_TreeViewDoubleClickEvent;
-
+                                
         }
 
-        private void BabatStudioForm_TreeViewDoubleClickEvent(object sender, EventArgs e)
+        private void BabatStudioForm_TreeViewDoubleClickEvent(object sender, TreeNodeMouseClickEventArgs e)
         {
-            //..run();
+            babatStudioForm.TreeViewDoubleClickDo(sender,e);
         }
 
         private void Send()
@@ -70,29 +70,43 @@ namespace BabatStudio.Presenters
                 Send();
                 babatStudioForm.CreateTab(mainService.MainProject.ProjectFiles[0]);
             }
+            
         }
         private void _babatStudioForm_OpenProjectEvent(object sender, EventArgs e)
         {
-            mainService.LoadProject();
-            babatStudioForm.CreateTab(mainService.MainProject.ProjectFiles[0]);
-            Send();
+            if (mainService.LoadProject())
+            {
+                babatStudioForm.CreateTab(mainService.MainProject.ProjectFiles[0]);
+                Send();
+            }
         }
         private void _babatStudioForm_NewFileEvent(object sender, EventArgs e)
         {
+            int tmp = mainService.MainProject.ProjectFiles.Count;
             mainService.AddFile();
+            if(tmp != mainService.MainProject.ProjectFiles.Count)
             babatStudioForm.CreateTab(mainService.MainProject.ProjectFiles[mainService.MainProject.ProjectFiles.Count - 1]);
+           
         }
         private void _babatStudioForm_OpenFileEvent(object sender, EventArgs e)
         {
             throw new NotImplementedException();
         }
-        private void _babatStudioForm_SaveEvent(object sender, EventArgs e)
+        private void _babatStudioForm_SaveEvent(object sender, ProjectCLS e)
         {
-            mainService.SaveFile();
+            if (mainService.MainProject.ProjectName != null)
+            {
+                mainService.MainProject = e;
+                mainService.SaveFile();
+            }
         }
-        private void _babatStudioForm_SaveAllEvent(object sender, EventArgs e)
+        private void _babatStudioForm_SaveAllEvent(object sender, ProjectCLS e)
         {
-            mainService.SaveAllFile();
+            if (mainService.MainProject.ProjectName != null)
+            {
+                mainService.MainProject = e;
+                mainService.SaveFile();
+            }
         }
         private void _babatStudioForm_CutEvent(object sender, EventArgs e)
         {
@@ -108,11 +122,11 @@ namespace BabatStudio.Presenters
         }
         private void _babatStudioForm_BuildEvent(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            mainService.Build();
         }
         private void _babatStudioForm_RunEvent(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            mainService.Run();
         }
         private void _babatStudioForm_CommentEvent(object sender, EventArgs e)
         {

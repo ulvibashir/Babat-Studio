@@ -36,12 +36,18 @@ namespace BabatStudio.Views
         {
             ChooseFolderEvent.Invoke(txtFolder, e);
         }
-
+        public void BtnOKEnabled()
+        {
+            btnOK.Enabled = true;
+        }
         
         bool IView.ShowDialog()
         {
             return this.ShowDialog() == DialogResult.OK;
         }
-        
+        private void TxtName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

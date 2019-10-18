@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 
 namespace BabatStudio
 {
-    public class ProjectCLS
+    public class ProjectCLS : EventArgs
     {
         public string ProjectName { get; set; }
         public string Path { get; set; }

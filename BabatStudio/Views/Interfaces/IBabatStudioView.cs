@@ -16,8 +16,8 @@ namespace BabatStudio.Interfaces
 
         event EventHandler NewFileEvent;
         event EventHandler OpenFileEvent;
-        event EventHandler SaveEvent;
-        event EventHandler SaveAllEvent;
+        event EventHandler<ProjectCLS> SaveEvent;
+        event EventHandler<ProjectCLS> SaveAllEvent;
 
         event EventHandler CutEvent;
         event EventHandler CopyEvent;
@@ -28,7 +28,7 @@ namespace BabatStudio.Interfaces
         event EventHandler CommentEvent;
         event EventHandler ExitEvent;
         event EventHandler CloseProjectEvent;
-        event EventHandler TreeViewDoubleClickEvent;
+        event EventHandler<TreeNodeMouseClickEventArgs> TreeViewDoubleClickEvent;
 
         event Action ProjectCollapseEvent;
         event Action TreeCollapseEvent;
@@ -66,6 +66,7 @@ namespace BabatStudio.Interfaces
         void TreeViewDoubleClickDo(object sender, TreeNodeMouseClickEventArgs e);
         void CreateTab(Files file);
         void CloseProject();
+        
 
 
 

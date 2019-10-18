@@ -82,6 +82,7 @@ namespace BabatStudio.Views
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(174, 20);
             this.txtName.TabIndex = 3;
+            this.txtName.TextChanged += new System.EventHandler(this.TxtName_TextChanged);
             // 
             // chkCreateSubdir
             // 
@@ -124,6 +125,7 @@ namespace BabatStudio.Views
             // 
             // btnOK
             // 
+            this.btnOK.Enabled = false;
             this.btnOK.Location = new System.Drawing.Point(124, 258);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(92, 30);

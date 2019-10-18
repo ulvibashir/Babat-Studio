@@ -1,16 +1,22 @@
-﻿namespace BabatStudio.Services
+﻿using System.CodeDom.Compiler;
+
+namespace BabatStudio.Services
 {
     public interface IMainService
     {
         ProjectCLS MainProject { get; set; }
 
         void AddFile(Files file);
-        bool IsExist(string name);
+        
         void WriteFiles();
         void WriteNewProject(bool subdirCheck);
         void AddFile();
-        void LoadProject();
+        bool LoadProject();
         void SaveFile();
-        void SaveAllFile();
+        void Build();
+        void Run();
+
+        CompilerResults compilerResults(string[] sources, string output, params string[] references);
+      
     }
 }

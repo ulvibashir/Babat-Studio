@@ -13,6 +13,7 @@ namespace BabatStudio.Views
         string ProjectPath { get; set; }
         bool IsSubdir { get;}
 
+        void BtnOKEnabled();
         
         void BtnChoosefolder_Click(object sender, EventArgs e);
     }
