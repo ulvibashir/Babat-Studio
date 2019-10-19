@@ -17,6 +17,7 @@ namespace BabatStudio.Services
         void Run();
 
         CompilerResults compilerResults(string[] sources, string output, params string[] references);
-      
+        CompilerResults result { get; set; }
+
     }
 }

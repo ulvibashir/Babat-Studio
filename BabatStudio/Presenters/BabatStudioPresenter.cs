@@ -46,18 +46,19 @@ namespace BabatStudio.Presenters
             babatStudioForm.TreeViewDoubleClickEvent += BabatStudioForm_TreeViewDoubleClickEvent;
                                 
         }
+        private void Send()
+        {
+            babatStudioForm.GetData(mainService.MainProject);
+        }
+        private void SendResult()
+        {
+            babatStudioForm.GetResult(mainService.result);
+        }
 
         private void BabatStudioForm_TreeViewDoubleClickEvent(object sender, TreeNodeMouseClickEventArgs e)
         {
             babatStudioForm.TreeViewDoubleClickDo(sender,e);
         }
-
-        private void Send()
-        {
-            babatStudioForm.GetData(mainService.MainProject);
-        }
-        
-
         private void _babatStudioForm_NewProjectEvent(object sender, EventArgs e)
         {
             var newProjectPresenter = IoC.Reference.Resolve<NewProjectPresenter>();
@@ -90,7 +91,7 @@ namespace BabatStudio.Presenters
         }
         private void _babatStudioForm_OpenFileEvent(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+           // throw new NotImplementedException();
         }
         private void _babatStudioForm_SaveEvent(object sender, ProjectCLS e)
         {
@@ -110,15 +111,15 @@ namespace BabatStudio.Presenters
         }
         private void _babatStudioForm_CutEvent(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            babatStudioForm.CutDo();
         }
         private void _babatStudioForm_CopyEvent(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            babatStudioForm.CopyDo();
         }
         private void _babatStudioForm_PasteEvent(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            babatStudioForm.PasteDo();
         }
         private void _babatStudioForm_BuildEvent(object sender, EventArgs e)
         {
@@ -127,20 +128,23 @@ namespace BabatStudio.Presenters
         private void _babatStudioForm_RunEvent(object sender, EventArgs e)
         {
             mainService.Run();
+            SendResult();
+            if (mainService.result != null)
+                babatStudioForm.LoadResultPage();
         }
         private void _babatStudioForm_CommentEvent(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            babatStudioForm.CommentDo();
         }
         private void _babatStudioForm_CloseProjectEvent(object sender, EventArgs e)
         {
+            mainService.MainProject.ProjectName = string.Empty;
             babatStudioForm.CloseProject();
         }
         private void BabatStudioForm_ProjectCollapse()
         {
             babatStudioForm.ProjectCollapseDo();
         }
-
         private void BabatStudioForm_TreeCollapse()
         {
             babatStudioForm.TreeCollapseDo();

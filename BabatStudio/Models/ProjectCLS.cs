@@ -20,7 +20,8 @@ namespace BabatStudio
     public class Files
     {
         public string FileName { get; set; }
-        public string FilePath { get; set; }
+
+        [XmlIgnore]
         public string Data { get; set; }
     }
 }

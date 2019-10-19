@@ -10,8 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.CSharp;
 using FastColoredTextBoxNS;
-
-
+using System.CodeDom.Compiler;
 
 namespace BabatStudio
 {
@@ -23,29 +22,22 @@ namespace BabatStudio
         public bool ErrorCollapseCheck { get; set; }
         public bool projectCollapseCheck { get; set; }
 
-        
+        public CompilerResults result { get; set; }
 
         public event EventHandler NewProjectEvent;
         public event EventHandler OpenProjectEvent;
-               
         public event EventHandler NewFileEvent;
         public event EventHandler OpenFileEvent;
         public event EventHandler<ProjectCLS> SaveEvent;
         public event EventHandler<ProjectCLS> SaveAllEvent;
-               
         public event EventHandler CutEvent;
         public event EventHandler CopyEvent;
         public event EventHandler PasteEvent;
-               
         public event EventHandler BuildEvent;
         public event EventHandler RunEvent;
         public event EventHandler CommentEvent;
-        
-        
-
         public event EventHandler ExitEvent;
         public event EventHandler CloseProjectEvent;
-
         public event Action ProjectCollapseEvent;
         public event Action TreeCollapseEvent;
         public event EventHandler<TreeNodeMouseClickEventArgs> TreeViewDoubleClickEvent;
@@ -56,40 +48,11 @@ namespace BabatStudio
             Project = new ProjectCLS();
             imageList = new ImageList();
             LoadImages();
-
-
         }
         public void BabatStudio_Load(object sender, EventArgs e)
         {
             
         }
-
-
-        #region Some Activity
-        bool IView.ShowDialog()
-        {
-            return this.ShowDialog() == DialogResult.OK;
-        }
-        public void GetData(ProjectCLS _projectCLS)
-        {
-            Project = _projectCLS;
-            LoadTreeView();
-        }
-        public void LoadImages()
-        {
-            imageList.Images.Add("Parent", Image.FromFile(@"..\..\..\Images\Parent.png"));
-            imageList.Images.Add("Child", Image.FromFile(@"..\..\..\Images\Child.png"));
-            treeView1.ImageList = imageList;
-            treeView1.ImageIndex = 1;
-            treeView1.SelectedImageIndex = 1;
-
-        }
-        private void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            TreeViewDoubleClickEvent.Invoke(sender, e);
-        }
-        
-        #endregion
 
         #region ToolStrip Buttons
 
@@ -280,6 +243,10 @@ namespace BabatStudio
 
         #endregion
 
+        bool IView.ShowDialog()
+        {
+            return this.ShowDialog() == DialogResult.OK;
+        }
         public void TreeViewDoubleClickDo(object sender, TreeNodeMouseClickEventArgs e)
         {
             bool check = false;
@@ -303,10 +270,22 @@ namespace BabatStudio
                 }
             }
         }
+        private void FastColoredText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (Project.ProjectName != null)
+            {
+                CheckUppdateTextAll();
+                //SaveAllEvent.Invoke(sender, Project);
+            }
+        }
+        private void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            TreeViewDoubleClickEvent.Invoke(sender, e);
+        }
         public void CreateTab(Files file)
         {
             TabPage tabPage = new TabPage();
-            
+            tabPage.ContextMenuStrip = contextMenuStrip1;
             FastColoredTextBox fastColoredText = new FastColoredTextBox();
             fastColoredText.TextChanged += FastColoredText_TextChanged;
             fastColoredText.Dock = DockStyle.Fill;
@@ -320,17 +299,6 @@ namespace BabatStudio
             
 
         }
-
-        private void FastColoredText_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (Project.ProjectName != null)
-            {
-
-                CheckUppdateTextAll();
-                SaveAllEvent.Invoke(sender, Project);
-            }
-        }
-
         private void LoadTreeView()
         {
             if (Project.ProjectName != null)
@@ -356,10 +324,9 @@ namespace BabatStudio
         {
             tabControl2.TabPages.Clear();
             treeView1.Nodes.Clear();
-            Project = null;
+            Project.ProjectName = string.Empty;
 
         }
-
         private void CheckUppdateTextOne()
         {
             foreach (var item in Project.ProjectFiles)
@@ -370,9 +337,6 @@ namespace BabatStudio
                 }
             }
         }
-
-
-
         private void CheckUppdateTextAll()
         {
             foreach (var item in tabControl2.TabPages)
@@ -386,6 +350,203 @@ namespace BabatStudio
                 }
             }
         }
+        public void CutDo()
+        {
+            (tabControl2.SelectedTab.Controls[0] as FastColoredTextBox).Cut();
+        }
+        public void CopyDo()
+        {
+            (tabControl2.SelectedTab.Controls[0] as FastColoredTextBox).Copy();
+        }
+        public void PasteDo()
+        {
+            (tabControl2.SelectedTab.Controls[0] as FastColoredTextBox).Paste();
+        }
+        public void CommentDo()
+        {
+            (tabControl2.SelectedTab.Controls[0] as FastColoredTextBox).CommentSelected();
+        }
+        public void GetData(ProjectCLS _projectCLS)
+        {
+            Project = _projectCLS;
+            LoadTreeView();
+        }
+        public void GetResult(CompilerResults compilerResults)
+        {
+            result = compilerResults;
+        }
+        public void LoadImages()
+        {
+            imageList.Images.Add("Parent", Image.FromFile(@"..\..\..\Images\Parent.png"));
+            imageList.Images.Add("Child", Image.FromFile(@"..\..\..\Images\Child.png"));
+            treeView1.ImageList = imageList;
+            treeView1.ImageIndex = 1;
+            treeView1.SelectedImageIndex = 1;
 
+        }
+      
+
+        public void LoadResultPage()
+        {
+            if (result.Errors.Count == 0 && result != null)
+            {
+                #region Errors
+                TableLayoutPanel panel = new TableLayoutPanel();
+                panel.Dock = DockStyle.Fill;
+                panel.AutoScroll = true;
+                panel.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
+                panel.ColumnCount = 4;
+                panel.RowCount = 1;
+                panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+                panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
+                panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+                panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+
+                panel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+                panel.Controls.Add(new Label() { Text = "Error Code" }, 0, 0);
+                panel.Controls.Add(new Label() { Text = "Message" }, 1, 0);
+                panel.Controls.Add(new Label() { Text = "Line" }, 2, 0);
+                panel.Controls.Add(new Label() { Text = "File" }, 3, 0);
+                panel.RowCount = panel.RowCount + 1;
+                panel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20));
+
+                tabControl1.TabPages[0].Controls.Clear();
+                tabControl1.TabPages[0].Controls.Add(panel);
+
+                #endregion
+
+                #region Warning
+                TableLayoutPanel warningpanel = new TableLayoutPanel();
+                warningpanel.Dock = DockStyle.Fill;
+                warningpanel.AutoScroll = true;
+                warningpanel.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
+                warningpanel.ColumnCount = 4;
+                warningpanel.RowCount = 1;
+                warningpanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+                warningpanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
+                warningpanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+                warningpanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+
+                warningpanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+                warningpanel.Controls.Add(new Label() { Text = "Warning Code" }, 0, 0);
+                warningpanel.Controls.Add(new Label() { Text = "Message" }, 1, 0);
+                warningpanel.Controls.Add(new Label() { Text = "Line" }, 2, 0);
+                warningpanel.Controls.Add(new Label() { Text = "File" }, 3, 0);
+                warningpanel.RowCount = warningpanel.RowCount + 1;
+                warningpanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20));
+
+                tabControl1.TabPages[1].Controls.Clear();
+                tabControl1.TabPages[1].Controls.Add(warningpanel);
+
+                #endregion
+
+                #region Output
+                string tmp = string.Empty;
+                tabControl1.SelectedTab = tabControl1.TabPages[2];
+                tmp = @"1>------ Build started: Project: BabatStudio, Configuration: Debug Any CPU ------
+1 > BabatStudio->D:\Visual Studio files\Babat - Studio\BabatStudio\bin\Debug\BabatStudio.exe
+========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
+";
+                tabControl1.TabPages[2].Controls[0].Text = tmp;
+                #endregion
+            }
+            else
+            {
+                #region Warning
+                TableLayoutPanel warningpanel = new TableLayoutPanel();
+                warningpanel.Dock = DockStyle.Fill;
+                warningpanel.AutoScroll = true;
+                warningpanel.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
+                warningpanel.ColumnCount = 4;
+                warningpanel.RowCount = 1;
+                warningpanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+                warningpanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
+                warningpanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+                warningpanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+
+                warningpanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+                warningpanel.Controls.Add(new Label() { Text = "Warning Code" }, 0, 0);
+                warningpanel.Controls.Add(new Label() { Text = "Message" }, 1, 0);
+                warningpanel.Controls.Add(new Label() { Text = "Line" }, 2, 0);
+                warningpanel.Controls.Add(new Label() { Text = "File" }, 3, 0);
+                warningpanel.RowCount = warningpanel.RowCount + 1;
+                warningpanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20));
+
+                tabControl1.TabPages[1].Controls.Clear();
+                tabControl1.TabPages[1].Controls.Add(warningpanel);
+
+                #endregion
+
+                TableLayoutPanel panel = new TableLayoutPanel();
+                panel.Dock = DockStyle.Fill;
+                panel.AutoScroll = true;
+                panel.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
+                panel.ColumnCount = 4;
+                panel.RowCount = 1;
+                panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+                panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
+                panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+                panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+
+                panel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+                panel.Controls.Add(new Label() { Text = "Error Code" }, 0, 0);
+                panel.Controls.Add(new Label() { Text = "Message" }, 1, 0);
+                panel.Controls.Add(new Label() { Text = "Line" }, 2, 0);
+                panel.Controls.Add(new Label() { Text = "File" }, 3, 0);
+
+
+                foreach (CompilerError err in result.Errors)
+                {
+                    panel.RowCount = panel.RowCount + 1;
+                    panel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20));
+                    panel.Controls.Add(new Label() { Text = err.ErrorNumber }, 0, panel.RowCount - 1);
+                    panel.Controls.Add(new Label() { Text = err.ErrorText }, 1, panel.RowCount - 1);
+                    panel.Controls.Add(new Label() { Text = err.Line.ToString() }, 2, panel.RowCount - 1) ;
+                    panel.Controls.Add(new Label() { Text = err.FileName }, 3, panel.RowCount - 1);
+                }
+                panel.RowCount = panel.RowCount + 1;
+                panel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20));
+
+                tabControl1.TabPages[0].Controls.Clear();
+                tabControl1.TabPages[0].Controls.Add(panel);
+                tabControl1.SelectedTab = tabControl1.TabPages[0];
+
+
+            }
+        }
+
+        private void CutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CutEvent.Invoke(sender, e);
+        }
+
+        private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CopyEvent.Invoke(sender, e);
+        }
+
+        private void PasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PasteEvent.Invoke(sender, e);
+        }
+
+        private void SaveFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CheckUppdateTextOne();
+
+            SaveEvent.Invoke(sender, Project);
+        }
+
+        
+
+        private void CloseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tabControl2.TabPages.Remove(tabControl2.SelectedTab);
+        }
+
+        private void ClosePageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tabControl2.TabPages.Remove(tabControl2.SelectedTab);
+        }
     }
 }
